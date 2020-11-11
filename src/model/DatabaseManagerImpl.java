@@ -27,6 +27,7 @@ public class DatabaseManagerImpl implements DatabaseManager
             throwables.printStackTrace();
         }
     }
+    //hello
 
     @Override
     public Hello getHello()
