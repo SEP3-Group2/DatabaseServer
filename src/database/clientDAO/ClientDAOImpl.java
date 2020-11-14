@@ -24,7 +24,7 @@ public class ClientDAOImpl implements ClientDAO
 
     private Connection getConnection() throws SQLException
     {
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/skeleton", "postgres", "1234");
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectsep3", "group2", "password");
     }
 
     @Override

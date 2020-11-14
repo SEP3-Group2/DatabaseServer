@@ -28,7 +28,7 @@ public class ProductDAOImpl implements ProductDAO
 
     private Connection getConnection() throws SQLException
     {
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/skeleton", "group2", "password");
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectsep3", "group2", "password");
     }
 
     //asd
