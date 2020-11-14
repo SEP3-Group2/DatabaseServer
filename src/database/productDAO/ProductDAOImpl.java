@@ -31,6 +31,7 @@ public class ProductDAOImpl implements ProductDAO
         return DriverManager.getConnection("jdbc:postgresql://localhost:5432/skeleton", "group2", "password");
     }
 
+    //asd
     @Override
     public List<Product> getAllProducts() throws SQLException
     {
