@@ -11,4 +11,5 @@ public interface DatabaseManager
     Hello getHello();
     
     List<Product> getAllProducts();
+    boolean addProduct(String title, String category, String description, double price);
 }
