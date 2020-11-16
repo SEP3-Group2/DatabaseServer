@@ -10,6 +10,27 @@ public class Product implements Serializable
     private String description;
     private double price;
 
+    public Product( int id,String title, String category, String description,
+        double price)
+    {
+        this.id=id;
+        this.title = title;
+        this.category = category;
+        this.description = description;
+        this.price = price;
+    }
+    public Product( String title, String category, String description,
+        double price)
+    {
+        this.title = title;
+        this.category = category;
+        this.description = description;
+        this.price = price;
+    }
+    public Product(){
+
+    }
+
     public int getId()
     {
         return id;

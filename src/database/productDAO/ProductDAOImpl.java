@@ -17,6 +17,7 @@ public class ProductDAOImpl implements ProductDAO
         DriverManager.registerDriver(new org.postgresql.Driver());
     }
 
+
     public static synchronized ProductDAOImpl getInstance() throws SQLException
     {
         if (instance == null)
@@ -28,7 +29,7 @@ public class ProductDAOImpl implements ProductDAO
 
     private Connection getConnection() throws SQLException
     {
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/skeleton", "postgres", "1234");
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectsep3", "group2", "password");
     }
 
     @Override
@@ -66,5 +67,30 @@ public class ProductDAOImpl implements ProductDAO
             throwables.printStackTrace();
         }
         return returnList;
+    }
+
+    @Override public Product addProduct(String title, String category,
+        String description, double price) throws SQLException
+    {
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "INSERT INTO\"SEP3\".product(title, category, description, price) VALUES(?,?,?,?)",
+                PreparedStatement.RETURN_GENERATED_KEYS);
+            statement.setString(1, title);
+            statement.setString(2, category);
+            statement.setString(3, description);
+            statement.setDouble(4, price);
+            statement.executeUpdate();
+
+            ResultSet resultSet = statement.getGeneratedKeys();
+            if (resultSet.next())
+            {
+                System.out.println("Product created in database");
+                return new Product(resultSet.getInt(1),title, category, description, price);
+            }
+            else
+                throw new SQLException("No keys generated");
+        }
     }
 }
