@@ -1,10 +1,7 @@
 package networking;
 
 import model.DatabaseManager;
-import transferobjects.Hello;
-import transferobjects.Product;
-import transferobjects.Request;
-import transferobjects.CustomerUser;
+import transferobjects.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -61,6 +58,10 @@ public class Handler implements Runnable
             else if("RegisterCustomerUser".equals(request.getType()))
             {
                 databaseManager.registerCustomerUser((CustomerUser)request.getArg());
+            }
+            else if("RegisterEmployeeUser".equals(request.getType()))
+            {
+                databaseManager.registerEmployeeUser((EmployeeUser)request.getArg());
             }
             else if("GetAllUsers".equals(request.getType())){
                 List<CustomerUser> result = databaseManager.getAllUsers();

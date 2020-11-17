@@ -8,6 +8,7 @@ import database.employeeUserDAO.EmployeeUserDAO;
 import database.employeeUserDAO.EmployeeUserDAOImpl;
 import database.productDAO.ProductDAO;
 import database.productDAO.ProductDAOImpl;
+import transferobjects.EmployeeUser;
 import transferobjects.Hello;
 import transferobjects.Product;
 import transferobjects.CustomerUser;
@@ -117,9 +118,16 @@ public class DatabaseManagerImpl implements DatabaseManager
     }
 
     @Override
-    public void registerEmployeeUser(CustomerUser customerUser)
+    public void registerEmployeeUser(EmployeeUser employeeUser)
     {
-        employeeUserDAO.addUser(customerUser);
+        try
+        {
+            employeeUserDAO.addUser(employeeUser);
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
     }
 
 }

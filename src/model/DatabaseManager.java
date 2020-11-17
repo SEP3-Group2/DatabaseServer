@@ -1,5 +1,6 @@
 package model;
 
+import transferobjects.EmployeeUser;
 import transferobjects.Hello;
 import transferobjects.Product;
 import transferobjects.CustomerUser;
@@ -16,5 +17,5 @@ public interface DatabaseManager
 
     void registerCustomerUser(CustomerUser customerUser);
     List<CustomerUser> getAllUsers();
-    void registerEmployeeUser(CustomerUser customerUser);
+    void registerEmployeeUser(EmployeeUser employeeUser);
 }
