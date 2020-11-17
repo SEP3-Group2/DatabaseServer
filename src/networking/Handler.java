@@ -2,18 +2,13 @@ package networking;
 
 import model.DatabaseManager;
 import transferobjects.Hello;
-import transferobjects.Image;
 import transferobjects.Product;
 import transferobjects.Request;
 
-import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeEvent;
-import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.sql.SQLException;
 import java.util.List;
 
 public class Handler implements Runnable
