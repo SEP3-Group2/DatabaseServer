@@ -1,11 +1,14 @@
 package SetupDatabase;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class CreateDatabase
 {
-  public static void main(String[] args) throws SQLException
+  public static void main(String[] args) throws SQLException, IOException
   {
     //BEFORE YOU RUN THE THIS MAIN:
     //CREATE A NEW DATABASE IN PGADMIN NAME: projectsep3
@@ -190,7 +193,7 @@ public class CreateDatabase
     {
       e.printStackTrace();
     }
-
+/*
     sql = "CREATE DOMAIN \"SEP3\".d_string\n"
         + "    AS character varying(100);";
 
@@ -287,7 +290,7 @@ public class CreateDatabase
     catch (SQLException e)
     {
       e.printStackTrace();
-    }
+    }*/
 
     sql = "CREATE TABLE IF NOT EXISTS \"SEP3\".product\n" + "(\n"
         + "    productid integer NOT NULL DEFAULT nextval('\"SEP3\".product_productid_seq'::regclass),\n"
@@ -488,6 +491,20 @@ public class CreateDatabase
     {
       e.printStackTrace();
     }
+
+
+    /*File file = new File("C:\\Users\\Kevin\\IdeaProjects\\DatabaseServer\\src\\SetupDatabase\\images\\profilepc.jpg");
+    FileInputStream fis = new FileInputStream(file);
+    PreparedStatement ps = connection.prepareStatement("INSERT INTO \"SEP3\".productimages VALUES (?, ?)");
+    ps.setString(1, file.getName());
+    ps.setBinaryStream(2, fis, file.length());
+    ps.executeUpdate();
+    ps.close();
+    fis.close();*/
+
+
+
+
 
     System.out.println("Database is done");
 

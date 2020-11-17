@@ -2,14 +2,18 @@ package networking;
 
 import model.DatabaseManager;
 import transferobjects.Hello;
+import transferobjects.Image;
 import transferobjects.Product;
 import transferobjects.Request;
 
+import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Handler implements Runnable
@@ -55,9 +59,9 @@ public class Handler implements Runnable
             else if ("AddProduct".equals(request.getType())){
                 Product product1 = (Product) request.getArg();
                 boolean product = databaseManager.addProduct(product1.getTitle(),product1.getCategory(), product1.getDescription(), product1.getPrice());
-
                 outToClient.writeObject(new Request("AddProduct", product));
             }
+
         }
         catch (IOException | ClassNotFoundException e)
         {
