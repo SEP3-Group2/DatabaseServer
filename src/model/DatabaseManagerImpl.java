@@ -2,10 +2,16 @@ package model;
 
 import database.clientDAO.ClientDAO;
 import database.clientDAO.ClientDAOImpl;
+import database.customerUserDAO.CustomerUserDAO;
+import database.customerUserDAO.CustomerUserDAOImpl;
+import database.employeeUserDAO.EmployeeUserDAO;
+import database.employeeUserDAO.EmployeeUserDAOImpl;
 import database.productDAO.ProductDAO;
 import database.productDAO.ProductDAOImpl;
 import transferobjects.Hello;
 import transferobjects.Product;
+import transferobjects.CustomerUser;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,6 +19,8 @@ public class DatabaseManagerImpl implements DatabaseManager
 {
     private ClientDAO clientDAO;
     private ProductDAO productDAO;
+    private CustomerUserDAO customerUserDAO;
+    private EmployeeUserDAO employeeUserDAO;
 
     public DatabaseManagerImpl()
     {
@@ -20,6 +28,8 @@ public class DatabaseManagerImpl implements DatabaseManager
         {
             clientDAO = ClientDAOImpl.getInstance();
             productDAO = ProductDAOImpl.getInstance();
+            customerUserDAO = CustomerUserDAOImpl.getInstance();
+            employeeUserDAO = EmployeeUserDAOImpl.getInstance();
         }
         catch (SQLException throwables)
         {
@@ -76,6 +86,40 @@ public class DatabaseManagerImpl implements DatabaseManager
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public void registerCustomerUser(CustomerUser customerUser)
+    {
+        try
+        {
+            System.out.println(customerUser.getEmail() + customerUser.getAddress() + customerUser.getName());
+            customerUserDAO.addUser(customerUser);
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<CustomerUser> getAllUsers()
+    {
+        try
+        {
+            return customerUserDAO.getAllUsers();
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void registerEmployeeUser(CustomerUser customerUser)
+    {
+        employeeUserDAO.addUser(customerUser);
     }
 
 }

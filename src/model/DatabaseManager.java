@@ -2,6 +2,7 @@ package model;
 
 import transferobjects.Hello;
 import transferobjects.Product;
+import transferobjects.CustomerUser;
 
 import java.util.List;
 
@@ -12,4 +13,8 @@ public interface DatabaseManager
     
     List<Product> getAllProducts();
     boolean addProduct(String title, String category, String description, double price);
+
+    void registerCustomerUser(CustomerUser customerUser);
+    List<CustomerUser> getAllUsers();
+    void registerEmployeeUser(CustomerUser customerUser);
 }
