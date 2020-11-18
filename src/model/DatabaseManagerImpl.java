@@ -130,4 +130,10 @@ public class DatabaseManagerImpl implements DatabaseManager
         }
     }
 
+    @Override
+    public CustomerUser getCustomerUser(String email)
+    {
+        return customerUserDAO.getUser(email);
+    }
+
 }

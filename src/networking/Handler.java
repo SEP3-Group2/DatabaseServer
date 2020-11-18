@@ -66,6 +66,10 @@ public class Handler implements Runnable
                 List<CustomerUser> result = databaseManager.getAllUsers();
                 outToClient.writeObject(new Request("GetAllUsers", result));
             }
+            else if("GetCustomerUser".equals(request.getType())){
+                CustomerUser result = databaseManager.getCustomerUser((String)request.getArg());
+                outToClient.writeObject(new Request("GetCustomerUser", result));
+            }
         }
         catch (IOException | ClassNotFoundException e)
         {

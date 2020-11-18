@@ -10,4 +10,6 @@ public interface CustomerUserDAO
     void addUser(CustomerUser customerUser) throws SQLException;
 
     List<CustomerUser> getAllUsers() throws SQLException;
+
+    CustomerUser getUser(String email);
 }

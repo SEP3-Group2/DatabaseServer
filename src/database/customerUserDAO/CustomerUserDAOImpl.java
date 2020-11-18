@@ -76,9 +76,9 @@ public class CustomerUserDAOImpl implements CustomerUserDAO
             while (resultSet.next())
             {
                 CustomerUser content = new CustomerUser(resultSet.getInt("customerid"),
-                        resultSet.getString("name"),
                         resultSet.getString("email"),
                         resultSet.getString("password"),
+                        resultSet.getString("name"),
                         resultSet.getString("address"),
                         resultSet.getString("phone"),
                         resultSet.getDate("birthday"));
@@ -91,5 +91,33 @@ public class CustomerUserDAOImpl implements CustomerUserDAO
             throwables.printStackTrace();
         }
         return returnList;
+    }
+
+    @Override
+    public CustomerUser getUser(String email)
+    {
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"SEP3\".Customer WHERE email = ?");
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next())
+            {
+                return new CustomerUser(
+                        resultSet.getInt("customerid"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getString("name"),
+                        resultSet.getString("address"),
+                        resultSet.getString("phone"),
+                        resultSet.getDate("birthday"));
+            }
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 }

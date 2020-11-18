@@ -18,4 +18,6 @@ public interface DatabaseManager
     void registerCustomerUser(CustomerUser customerUser);
     List<CustomerUser> getAllUsers();
     void registerEmployeeUser(EmployeeUser employeeUser);
+
+    CustomerUser getCustomerUser(String email);
 }
