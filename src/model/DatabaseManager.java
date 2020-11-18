@@ -20,4 +20,6 @@ public interface DatabaseManager
     void registerEmployeeUser(EmployeeUser employeeUser);
 
     CustomerUser getCustomerUser(String email);
+
+    EmployeeUser getEmployeeUser(String email);
 }

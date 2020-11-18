@@ -133,7 +133,29 @@ public class DatabaseManagerImpl implements DatabaseManager
     @Override
     public CustomerUser getCustomerUser(String email)
     {
-        return customerUserDAO.getUser(email);
+        try
+        {
+            return customerUserDAO.getUser(email);
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public EmployeeUser getEmployeeUser(String email)
+    {
+        try
+        {
+            return employeeUserDAO.getUser(email);
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 
 }

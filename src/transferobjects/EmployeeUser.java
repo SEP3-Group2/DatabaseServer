@@ -15,7 +15,7 @@ public class EmployeeUser implements Serializable
     private String position;
     private int storeID;
 
-    public EmployeeUser(int userID, String email, String password, String name, String address, String phone, int securityLevel, String position, int storeID)
+    public EmployeeUser(int userID, String name, String email, String address, String phone, int securityLevel, String position, int storeID, String password)
     {
         this.userID = userID;
         this.email = email;

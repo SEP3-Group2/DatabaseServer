@@ -8,4 +8,6 @@ import java.sql.SQLException;
 public interface EmployeeUserDAO
 {
     void addUser(EmployeeUser employeeUser) throws SQLException;
+
+    EmployeeUser getUser(String email) throws SQLException;
 }

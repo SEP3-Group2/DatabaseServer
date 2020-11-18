@@ -1,5 +1,6 @@
 package database.employeeUserDAO;
 
+import transferobjects.CustomerUser;
 import transferobjects.EmployeeUser;
 
 import java.sql.*;
@@ -53,5 +54,35 @@ public class EmployeeUserDAOImpl implements EmployeeUserDAO
             else
                 throw new SQLException("No keys generated");
         }
+    }
+
+    @Override
+    public EmployeeUser getUser(String email) throws SQLException
+    {
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"SEP3\".employee WHERE email = ?");
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next())
+            {
+                return new EmployeeUser(
+                        resultSet.getInt("employeeid"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("address"),
+                        resultSet.getString("contact"),
+                        resultSet.getInt("seclevel"),
+                        resultSet.getString("positon"),
+                        resultSet.getInt("storeid"),
+                        resultSet.getString("password"));
+            }
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 }
