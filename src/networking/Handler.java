@@ -1,9 +1,7 @@
 package networking;
 
 import model.DatabaseManager;
-import transferobjects.Hello;
-import transferobjects.Product;
-import transferobjects.Request;
+import transferobjects.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -56,7 +54,18 @@ public class Handler implements Runnable
                 boolean product = databaseManager.addProduct(product1.getTitle(),product1.getCategory(), product1.getDescription(), product1.getPrice());
                 outToClient.writeObject(new Request("AddProduct", product));
             }
-
+            else if("RegisterCustomerUser".equals(request.getType()))
+            {
+                databaseManager.registerCustomerUser((CustomerUser)request.getArg());
+            }
+            else if("RegisterEmployeeUser".equals(request.getType()))
+            {
+                databaseManager.registerEmployeeUser((EmployeeUser)request.getArg());
+            }
+            else if("GetAllUsers".equals(request.getType())){
+                List<CustomerUser> result = databaseManager.getAllUsers();
+                outToClient.writeObject(new Request("GetAllUsers", result));
+            }
         }
         catch (IOException | ClassNotFoundException e)
         {
