@@ -52,7 +52,6 @@ public class Handler implements Runnable
             else if ("AddProduct".equals(request.getType())){
                 Product product1 = (Product) request.getArg();
                 boolean product = databaseManager.addProduct(product1.getTitle(),product1.getCategory(), product1.getDescription(), product1.getPrice());
-
                 outToClient.writeObject(new Request("AddProduct", product));
             }
             else if("RegisterCustomerUser".equals(request.getType()))
