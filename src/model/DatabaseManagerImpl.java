@@ -8,6 +8,12 @@ import database.employeeUserDAO.EmployeeUserDAO;
 import database.employeeUserDAO.EmployeeUserDAOImpl;
 import database.productDAO.ProductDAO;
 import database.productDAO.ProductDAOImpl;
+import model.customermanager.CustomerManager;
+import model.customermanager.CustomerManagerImpl;
+import model.employeemanager.EmployeeManager;
+import model.employeemanager.EmployeeManagerImpl;
+import model.productmanager.ProductManager;
+import model.productmanager.ProductManagerImpl;
 import transferobjects.EmployeeUser;
 import transferobjects.Hello;
 import transferobjects.Product;
@@ -16,8 +22,35 @@ import transferobjects.CustomerUser;
 import java.sql.SQLException;
 import java.util.List;
 
-public class DatabaseManagerImpl implements DatabaseManager
+public class DatabaseManagerImpl
 {
+    private final CustomerManager customerManager;
+    private final ProductManager productManager;
+    private final EmployeeManager employeeManager;
+
+    public DatabaseManagerImpl()
+    {
+        customerManager = new CustomerManagerImpl();
+        productManager = new ProductManagerImpl();
+        employeeManager = new EmployeeManagerImpl();
+    }
+
+    public CustomerManager getCustomerManager()
+    {
+        return customerManager;
+    }
+
+    public ProductManager getProductManager()
+    {
+        return productManager;
+    }
+
+    public EmployeeManager getEmployeeManager()
+    {
+        return employeeManager;
+    }
+
+    /*
     private ClientDAO clientDAO;
     private ProductDAO productDAO;
     private CustomerUserDAO customerUserDAO;
@@ -38,6 +71,7 @@ public class DatabaseManagerImpl implements DatabaseManager
         }
     }
     //woof
+
 
     @Override
     public Hello getHello()
@@ -157,5 +191,7 @@ public class DatabaseManagerImpl implements DatabaseManager
         }
         return null;
     }
+
+     */
 
 }
