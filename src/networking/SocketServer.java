@@ -1,6 +1,7 @@
 package networking;
 
 import model.DatabaseManager;
+import model.DatabaseManagerImpl;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -8,7 +9,7 @@ import java.net.Socket;
 
 public class SocketServer
 {
-    private DatabaseManager databaseManager;
+    private DatabaseManagerImpl databaseManager;
 
     public void start()
     {
@@ -22,6 +23,11 @@ public class SocketServer
                 Socket socket = serverSocket.accept();
                 System.out.println("Connection established");
                 new Thread(new Handler(socket, databaseManager)).start();
+                /*
+                new Thread(new CustomerHandler(socket, databaseManager)).start();
+                new Thread(new EmployeeHandler(socket, databaseManager)).start();
+                new Thread(new ProductHandler(socket, databaseManager)).start();
+                */
             }
         }
         catch (IOException e)
@@ -30,8 +36,15 @@ public class SocketServer
         }
     }
 
+    public SocketServer(DatabaseManagerImpl databaseManager)
+    {
+        this.databaseManager = databaseManager;
+    }
+
+    /*
     public SocketServer(DatabaseManager databaseManager)
     {
         this.databaseManager = databaseManager;
     }
+    */
 }
