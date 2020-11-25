@@ -68,6 +68,25 @@ public class Handler implements Runnable
                 EmployeeUser result = databaseManager.getEmployeeManager().getEmployeeUser((String)request.getArg());
                 outToClient.writeObject(new Request("GetEmployeeUser", result));
             }
+            else if("GetTitleFilteredProducts".equals(request.getType())){
+                List<Product> result = databaseManager.getProductManager().getTitleFilteredProducts((String)request.getArg());
+                outToClient.writeObject(new Request("GetTitleFilteredProducts", result));
+            }
+            else if("GetTitleCategoryFilteredProducts".equals(request.getType())){
+                String [] requests = (String[]) request.getArg();
+                String title = requests[0];
+                String category = requests[1];
+                List<Product> result = databaseManager.getProductManager().getTitleCategoryFilteredProducts(title, category);
+                outToClient.writeObject(new Request("GetTitleCategoryFilteredProducts", result));
+            }
+            else if("GetTitleCategoryPriceFilteredProducts".equals(request.getType())){
+                String [] requests = (String[]) request.getArg();
+                String title = requests[0];
+                String category = requests[1];
+                String price = requests[2];
+                List<Product> result = databaseManager.getProductManager().getTitleCategoryPriceFilteredProducts(title, category,price);
+                outToClient.writeObject(new Request("GetTitleCategoryPriceFilteredProducts", result));
+            }
         }
         catch (IOException | ClassNotFoundException e)
         {

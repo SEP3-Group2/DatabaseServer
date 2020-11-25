@@ -37,6 +37,45 @@ public class ProductManagerImpl implements ProductManager
         return null;
     }
 
+    @Override public List<Product> getTitleFilteredProducts(String title)
+    {
+        try
+        {
+            return productDAO.getTitleFilteredProducts(title);
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override public List<Product> getTitleCategoryFilteredProducts(String title, String category)
+    {
+        try
+        {
+            return productDAO.getTitleCategoryFilteredProducts(title,category);
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override public List<Product> getTitleCategoryPriceFilteredProducts(String title, String category, String price)
+    {
+        try
+        {
+            return productDAO.getTitleCategoryPriceFilteredProducts(title,category,Integer.parseInt(price));
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
     public boolean addProduct(String title, String category, String description, double price)
     {

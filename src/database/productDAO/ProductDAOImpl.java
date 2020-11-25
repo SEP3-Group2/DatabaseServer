@@ -38,19 +38,119 @@ public class ProductDAOImpl implements ProductDAO
   @Override public List<Product> getAllProducts() throws SQLException
   {
     List<Product> returnList = new ArrayList<Product>();
-    try
+    try (Connection connection = getConnection())
     {
-      DriverManager.registerDriver(new org.postgresql.Driver());
+      PreparedStatement statement = connection
+          .prepareStatement("SELECT * FROM \"SEP3\".Product");
+      ResultSet resultSet = statement.executeQuery();
+
+      while (resultSet.next())
+      {
+        Product content = new Product();
+        content.setId(resultSet.getInt("productid"));
+        content.setTitle(resultSet.getString("title"));
+        content.setCategory(resultSet.getString("category"));
+        content.setDescription(resultSet.getString("description"));
+        content.setPrice(resultSet.getDouble("price"));
+
+        returnList.add(content);
+      }
     }
     catch (SQLException throwables)
     {
       throwables.printStackTrace();
     }
+    return returnList;
+  }
 
+  @Override public List<Product> getTitleFilteredProducts(String title)
+      throws SQLException
+  {
+    List<Product> returnList = new ArrayList<Product>();
     try (Connection connection = getConnection())
     {
-      PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM \"SEP3\".Product");
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM \"SEP3\".Product where title LIKE ?");
+      statement.setString(1, "%" + title + "%");
+      ResultSet resultSet = statement.executeQuery();
+
+      while (resultSet.next())
+      {
+        Product content = new Product();
+        content.setId(resultSet.getInt("productid"));
+        content.setTitle(resultSet.getString("title"));
+        content.setCategory(resultSet.getString("category"));
+        content.setDescription(resultSet.getString("description"));
+        content.setPrice(resultSet.getDouble("price"));
+
+        returnList.add(content);
+      }
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return returnList;
+  }
+
+  @Override public List<Product> getTitleCategoryFilteredProducts(String title,
+      String category) throws SQLException
+  {
+    if (title.equalsIgnoreCase("nullnull"))
+    {
+      title = "";
+    }
+    if (category.equalsIgnoreCase("All"))
+    {
+      category = "";
+    }
+    List<Product> returnList = new ArrayList<Product>();
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM \"SEP3\".Product where title LIKE ? AND category LIKE ?");
+      statement.setString(1, "%" + title + "%");
+      statement.setString(2, "%" + category + "%");
+      ResultSet resultSet = statement.executeQuery();
+
+      while (resultSet.next())
+      {
+        Product content = new Product();
+        content.setId(resultSet.getInt("productid"));
+        content.setTitle(resultSet.getString("title"));
+        content.setCategory(resultSet.getString("category"));
+        content.setDescription(resultSet.getString("description"));
+        content.setPrice(resultSet.getDouble("price"));
+
+        returnList.add(content);
+      }
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return returnList;
+  }
+
+  @Override public List<Product> getTitleCategoryPriceFilteredProducts(String title,
+      String category, int price) throws SQLException
+  {
+    if (title.equalsIgnoreCase("nullnull"))
+    {
+      title = "";
+    }
+    if (category.equalsIgnoreCase("All"))
+    {
+      category = "";
+    }
+    List<Product> returnList = new ArrayList<Product>();
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM \"SEP3\".Product where title LIKE ? AND category LIKE ? AND price<= ?");
+      statement.setString(1, "%" + title + "%");
+      statement.setString(2, "%" + category + "%");
+      statement.setInt(3, price);
       ResultSet resultSet = statement.executeQuery();
 
       while (resultSet.next())
@@ -97,6 +197,5 @@ public class ProductDAOImpl implements ProductDAO
         throw new SQLException("No keys generated");
     }
   }
-
 
 }
