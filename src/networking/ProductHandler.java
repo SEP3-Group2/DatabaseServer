@@ -45,7 +45,7 @@ public class ProductHandler implements Runnable
             }
             else if ("AddProduct".equals(request.getType())){
                 Product product1 = (Product) request.getArg();
-                boolean product = databaseManager.getProductManager().addProduct(product1.getTitle(),product1.getCategory(), product1.getDescription(), product1.getPrice());
+                Product product = databaseManager.getProductManager().addProduct(product1.getTitle(),product1.getCategory(), product1.getDescription(), product1.getPrice());
                 outToClient.writeObject(new Request("AddProduct", product));
             }
         }

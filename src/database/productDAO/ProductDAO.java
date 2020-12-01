@@ -14,4 +14,7 @@ public interface ProductDAO
     List<Product> getTitleCategoryPriceFilteredProducts(String title, String category,int price) throws SQLException;
 
     Product addProduct(String title, String category, String description, double price) throws SQLException;
+    void addImageToProduct(int productID, String base64String) throws SQLException;
+
+    int getLastProductID() throws SQLException;
 }

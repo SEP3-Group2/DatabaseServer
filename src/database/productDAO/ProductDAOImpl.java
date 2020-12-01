@@ -4,6 +4,7 @@ import database.clientDAO.ClientDAOImpl;
 import transferobjects.Hello;
 import transferobjects.Product;
 
+import java.io.File;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
@@ -198,4 +199,32 @@ public class ProductDAOImpl implements ProductDAO
     }
   }
 
+  @Override
+  public void addImageToProduct(int productID, String base64String) throws SQLException
+  {
+    File file = new File("");
+
+  }
+
+  @Override
+  public int getLastProductID() throws SQLException
+  {
+    int content = 0;
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+              "SELECT MAX(productid) FROM \"SEP3\".product;");
+      ResultSet resultSet = statement.executeQuery();
+
+      if (resultSet.next())
+      {
+        content = resultSet.getInt("max");
+      }
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return content;
+  }
 }

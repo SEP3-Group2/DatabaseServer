@@ -11,5 +11,7 @@ public interface ProductManager
     List<Product> getTitleCategoryFilteredProducts(String title, String category);
     List<Product> getTitleCategoryPriceFilteredProducts(String title, String category, String price);
 
-    boolean addProduct(String title, String category, String description, double price);
+    Product addProduct(String title, String category, String description, double price);
+
+    int getLastProductID();
 }

@@ -77,24 +77,31 @@ public class ProductManagerImpl implements ProductManager
     }
 
     @Override
-    public boolean addProduct(String title, String category, String description, double price)
+    public Product addProduct(String title, String category, String description, double price)
     {
         try
         {
             Product tmp = productDAO.addProduct(title, category, description, price);
-            if(tmp != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return tmp;
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
-        return false;
+        return null;
+    }
+
+    @Override
+    public int getLastProductID()
+    {
+        try
+        {
+            return productDAO.getLastProductID();
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return 0;
     }
 }

@@ -44,7 +44,7 @@ public class Handler implements Runnable
             }
             else if ("AddProduct".equals(request.getType())){
                 Product product1 = (Product) request.getArg();
-                boolean product = databaseManager.getProductManager().addProduct(product1.getTitle(),product1.getCategory(), product1.getDescription(), product1.getPrice());
+                Product product = databaseManager.getProductManager().addProduct(product1.getTitle(),product1.getCategory(), product1.getDescription(), product1.getPrice());
                 outToClient.writeObject(new Request("AddProduct", product));
             }
             else if("RegisterCustomerUser".equals(request.getType()))
@@ -71,13 +71,6 @@ public class Handler implements Runnable
                 Product result = databaseManager.getProductManager().getProductById((int)request.getArg());
                 outToClient.writeObject(new Request("GetProductById", result));
             }
-            else if("GetTitleCategoryFilteredProducts".equals(request.getType())){
-                String [] requests = (String[]) request.getArg();
-                String title = requests[0];
-                String category = requests[1];
-                List<Product> result = databaseManager.getProductManager().getTitleCategoryFilteredProducts(title, category);
-                outToClient.writeObject(new Request("GetTitleCategoryFilteredProducts", result));
-            }
             else if("GetTitleCategoryPriceFilteredProducts".equals(request.getType())){
                 String [] requests = (String[]) request.getArg();
                 String title = requests[0];
@@ -85,6 +78,10 @@ public class Handler implements Runnable
                 String price = requests[2];
                 List<Product> result = databaseManager.getProductManager().getTitleCategoryPriceFilteredProducts(title, category,price);
                 outToClient.writeObject(new Request("GetTitleCategoryPriceFilteredProducts", result));
+            }
+            else if("GetLastProductID".equals(request.getType())){
+                int returnID = databaseManager.getProductManager().getLastProductID();
+                outToClient.writeObject(new Request("GetLastProductID", returnID));
             }
         }
         catch (IOException | ClassNotFoundException e)
