@@ -360,7 +360,7 @@ public class CreateDatabase
         + "    address \"SEP3\".d_string COLLATE pg_catalog.\"default\" NOT NULL,\n"
         + "    contact \"SEP3\".d_string COLLATE pg_catalog.\"default\" NOT NULL,\n"
         + "    seclevel integer NOT NULL,\n"
-        + "    positon \"SEP3\".d_string COLLATE pg_catalog.\"default\" NOT NULL,\n"
+        + "    position \"SEP3\".d_string COLLATE pg_catalog.\"default\" NOT NULL,\n"
         + "    storeid integer NOT NULL,\n"
         + "    password \"SEP3\".d_string COLLATE pg_catalog.\"default\" NOT NULL,\n"
         + "    CONSTRAINT employee_pkey PRIMARY KEY (employeeid), \n"
@@ -669,6 +669,346 @@ public class CreateDatabase
     "INSERT INTO \"SEP3\".product (title,category,description,price)VALUES ('DJI Mavic Mini','Drones ','The DJI Mavic Mini drone mimics the foldable design of its larger siblings in a compact construction of 249 g. It is equipped with a sling bar with 3 axes and 2.7K video recording. The drone can fly for 30 minutes with a range of up to 2 km.','3090');" +
     " INSERT INTO \"SEP3\".product (title,category,description,price)VALUES ('Ryze Tello','Drones ','Have unlimited fun and take cool pictures and videos with the small but lively Tello drone from Ryze. Whether you are outside, at work or at home, you can take off with the drone and experience the world from above.','1199');" +
     "INSERT INTO \"SEP3\".product (title,category,description,price)VALUES ('Denver DRO-170','Drones ','Impress your friends with flight demonstrations with this smart Denver drone DRO-170. The drone has a flight time of up to 7 minutes. Operate the drone with a special hand-mounted controller. The drone has a hold-height function.','299');";
+
+    try
+    {
+      Statement statement = connection.createStatement();
+      statement.execute(sql);
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+
+    sql = "INSERT INTO \"SEP3\".store (storeid,address, contact, email) VALUES (1,'8700 Horsens, Sundvej 7', '548292', 'horsens@selectric.dk');"+
+    "INSERT INTO \"SEP3\".store (storeid,address, contact, email) VALUES (2,'9000 Aalborg, Jyllandsgade 26', '947581', 'aalborg@selectric.dk');"+
+    "INSERT INTO \"SEP3\".store (storeid,address, contact, email) VALUES (3,'2000 Frederiksberg, Smallegade 20', '738562', 'frederiksberg@selectric.dk')";
+
+    try
+    {
+      Statement statement = connection.createStatement();
+      statement.execute(sql);
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+
+    sql = "INSERT INTO \"SEP3\".employee (employeeid,name,email,address,contact,seclevel,position,storeid,password) VALUES (1,'HR', 'HR', 'Horsens','5284528',4,'HR',1,'HR');"+
+        "INSERT INTO \"SEP3\".employee (employeeid,name,email,address,contact,seclevel,position,storeid,password) VALUES (2,'John', 'one', 'Aalborg','47389553',1,'Cashier',2,'one');"+
+        "INSERT INTO \"SEP3\".employee (employeeid,name,email,address,contact,seclevel,position,storeid,password) VALUES (3,'Bob', 'two', 'Aalborg','47893847',2,'Salesman',2,'two');"+
+        "INSERT INTO \"SEP3\".employee (employeeid,name,email,address,contact,seclevel,position,storeid,password) VALUES (4,'Alice', 'three', 'Frederiksberg','739637648',3,'Warehouse manager',3,'three')";
+
+    try
+    {
+      Statement statement = connection.createStatement();
+      statement.execute(sql);
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+
+    sql = "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 1, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 2, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 3, 20);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 4, 3);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 5, 4);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 6, 15);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 7, 16);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 8, 5);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 9, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 10, 18);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 11, 13);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 12, 19);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 13, 15);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 14, 16);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 15, 20);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 16, 10);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 17, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 18, 4);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 19, 2);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 20, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 21, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 22, 4);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 23, 18);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 24, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 25, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 26, 12);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 27, 10);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 28, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 29, 13);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 30, 15);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 31, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 32, 4);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 33, 0);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 34, 13);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 35, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 36, 3);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 37, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 38, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 39, 2);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 40, 12);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 41, 5);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 42, 4);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 43, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 44, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 45, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 46, 14);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 47, 15);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 48, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 49, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 50, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 51, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 52, 5);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 53, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 54, 3);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 55, 0);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 56, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 57, 16);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 58, 13);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 59, 18);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 60, 4);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 61, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 62, 19);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 63, 13);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 64, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 65, 2);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 66, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 67, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 68, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 69, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 70, 16);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 71, 17);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 72, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 73, 10);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 74, 19);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 75, 20);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 76, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 77, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 78, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 79, 5);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 80, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 81, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 82, 2);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 83, 3);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 84, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 85, 5);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 86, 10);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 87, 14);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 88, 17);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 89, 5);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 90, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 91, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 92, 2);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 93, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 94, 4);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 95, 16);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 96, 18);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 97, 17);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 98, 12);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 99, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 100, 4);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 1, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 2, 3);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 3, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 4, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 5, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 6, 10);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 7, 17);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 8, 18);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 9, 13);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 10, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 11, 0);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 12, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 13, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 14, 18);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 15, 14);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 16, 3);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 17, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 18, 5);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 19, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 20, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 21, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 22, 3);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 23, 17);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 24, 19);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 25, 20);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 26, 15);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 27, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 28, 4);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 29, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 30, 0);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 31, 4);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 32, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 33, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 34, 3);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 35, 2);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 36, 10);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 37, 17);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 38, 16);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 39, 13);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 40, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 41, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 42, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 43, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 44, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 45, 10);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 46, 15);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 47, 20);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 48, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 49, 14);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 50, 17);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 51, 12);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 52, 3);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 53, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 54, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 55, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 56, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 57, 0);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 58, 19);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 59, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 60, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 61, 2);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 62, 5);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 63, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 64, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 65, 15);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 66, 12);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 67, 18);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 68, 17);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 69, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 70, 0);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 71, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 72, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 73, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 74, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 75, 13);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 76, 20);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 77, 17);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 78, 12);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 79, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 80, 10);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 81, 2);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 82, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 83, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 84, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 85, 5);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 86, 16);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 87, 17);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 88, 19);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 89, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 90, 10);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 91, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 92, 0);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 93, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 94, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 95, 4);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 96, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 97, 3);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 98, 15);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 99, 13);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 100, 17);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 1, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 2, 2);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 3, 18);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 4, 5);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 5, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 6, 3);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 7, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 8, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 9, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 10, 17);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 11, 14);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 12, 12);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 13, 19);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 14, 20);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 15, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 16, 2);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 17, 0);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 18, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 19, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 20, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 21, 15);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 22, 14);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 23, 19);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 24, 2);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 25, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 26, 5);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 27, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 28, 0);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 29, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 30, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 31, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 32, 4);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 33, 3);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 34, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 35, 10);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 36, 15);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 37, 18);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 38, 19);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 39, 5);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 40, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 41, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 42, 0);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 43, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 44, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 45, 17);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 46, 13);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 47, 10);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 48, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 49, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 50, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 51, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 52, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 53, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 54, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 55, 17);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 56, 16);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 57, 15);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 58, 14);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 59, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 60, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 61, 10);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 62, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 63, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 64, 0);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 65, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 66, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 67, 4);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 68, 14);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 69, 17);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 70, 19);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 71, 20);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 72, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 73, 3);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 74, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 75, 5);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 76, 13);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 77, 15);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 78, 18);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 79, 3);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 80, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 81, 0);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 82, 9);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 83, 6);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 84, 5);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 85, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 86, 11);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 87, 10);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 88, 19);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 89, 13);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 90, 8);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 91, 1);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 92, 0);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 93, 7);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 94, 5);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 95, 16);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 96, 14);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 97, 13);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 98, 12);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 99, 19);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 100, 8);";
 
     try
     {
