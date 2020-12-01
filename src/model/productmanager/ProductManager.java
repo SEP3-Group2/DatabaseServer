@@ -7,7 +7,7 @@ import java.util.List;
 public interface ProductManager
 {
     List<Product> getAllProducts();
-    List<Product> getTitleFilteredProducts(String title);
+    Product getProductById(int id);
     List<Product> getTitleCategoryFilteredProducts(String title, String category);
     List<Product> getTitleCategoryPriceFilteredProducts(String title, String category, String price);
 
