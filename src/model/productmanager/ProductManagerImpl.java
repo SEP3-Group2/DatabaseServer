@@ -37,11 +37,11 @@ public class ProductManagerImpl implements ProductManager
         return null;
     }
 
-    @Override public List<Product> getTitleFilteredProducts(String title)
+    @Override public Product getProductById(int id)
     {
         try
         {
-            return productDAO.getTitleFilteredProducts(title);
+            return productDAO.getProductById(id);
         }
         catch (SQLException throwables)
         {

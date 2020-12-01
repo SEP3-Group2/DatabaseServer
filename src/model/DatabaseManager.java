@@ -13,7 +13,7 @@ public interface DatabaseManager
     Hello getHello();
     
     List<Product> getAllProducts();
-    List<Product> getFilteredProducts(String title);
+    List<Product> getProductById(int id);
     boolean addProduct(String title, String category, String description, double price);
 
     void registerCustomerUser(CustomerUser customerUser);

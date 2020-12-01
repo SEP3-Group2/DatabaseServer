@@ -63,34 +63,34 @@ public class ProductDAOImpl implements ProductDAO
     return returnList;
   }
 
-  @Override public List<Product> getTitleFilteredProducts(String title)
+  @Override public Product getProductById(int id)
       throws SQLException
-  {
-    List<Product> returnList = new ArrayList<Product>();
+  {Product content = new Product();
+
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "SELECT * FROM \"SEP3\".Product where title LIKE ?");
-      statement.setString(1, "%" + title + "%");
+          "SELECT * FROM \"SEP3\".Product where productid = ?");
+      statement.setInt(1,   id  );
       ResultSet resultSet = statement.executeQuery();
 
-      while (resultSet.next())
+      if (resultSet.next())
       {
-        Product content = new Product();
+
         content.setId(resultSet.getInt("productid"));
         content.setTitle(resultSet.getString("title"));
         content.setCategory(resultSet.getString("category"));
         content.setDescription(resultSet.getString("description"));
         content.setPrice(resultSet.getDouble("price"));
 
-        returnList.add(content);
+
       }
     }
     catch (SQLException throwables)
     {
       throwables.printStackTrace();
     }
-    return returnList;
+    return content;
   }
 
   @Override public List<Product> getTitleCategoryFilteredProducts(String title,

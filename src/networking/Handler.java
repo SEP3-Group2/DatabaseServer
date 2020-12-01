@@ -1,6 +1,5 @@
 package networking;
 
-import model.DatabaseManager;
 import model.DatabaseManagerImpl;
 import transferobjects.*;
 
@@ -68,9 +67,9 @@ public class Handler implements Runnable
                 EmployeeUser result = databaseManager.getEmployeeManager().getEmployeeUser((String)request.getArg());
                 outToClient.writeObject(new Request("GetEmployeeUser", result));
             }
-            else if("GetTitleFilteredProducts".equals(request.getType())){
-                List<Product> result = databaseManager.getProductManager().getTitleFilteredProducts((String)request.getArg());
-                outToClient.writeObject(new Request("GetTitleFilteredProducts", result));
+            else if("GetProductById".equals(request.getType())){
+                Product result = databaseManager.getProductManager().getProductById((int)request.getArg());
+                outToClient.writeObject(new Request("GetProductById", result));
             }
             else if("GetTitleCategoryFilteredProducts".equals(request.getType())){
                 String [] requests = (String[]) request.getArg();
