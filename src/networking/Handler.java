@@ -83,6 +83,19 @@ public class Handler implements Runnable
                 int returnID = databaseManager.getProductManager().getLastProductID();
                 outToClient.writeObject(new Request("GetLastProductID", returnID));
             }
+            else if("GetAllWarehouseProducts".equals(request.getType())){
+                List<WarehouseProduct> result=databaseManager.getWarehouseProductManager().getAllWarehouseProducts();
+                outToClient.writeObject(new Request("GetAllWarehouseProducts", result));
+            }
+            else if("GetStoreWarehouseProducts".equals(request.getType())){
+                List<WarehouseProduct> result=databaseManager.getWarehouseProductManager().getStoreWarehouseProducts((int)request.getArg());
+                outToClient.writeObject(new Request("GetStoreWarehouseProducts", result));
+            }
+            else if("AddWarehouseProduct".equals(request.getType())){
+                WarehouseProduct warehouseProduct1=(WarehouseProduct) request.getArg();
+                WarehouseProduct warehouseProduct=databaseManager.getWarehouseProductManager().addWarehouseProduct(warehouseProduct1.getStoreId(),warehouseProduct1.getProductId(), warehouseProduct1.getQuantity());
+                outToClient.writeObject(new Request("AddWarehouseProduct", warehouseProduct));
+            }
         }
         catch (IOException | ClassNotFoundException e)
         {

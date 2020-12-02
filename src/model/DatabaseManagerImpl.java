@@ -14,6 +14,8 @@ import model.employeemanager.EmployeeManager;
 import model.employeemanager.EmployeeManagerImpl;
 import model.productmanager.ProductManager;
 import model.productmanager.ProductManagerImpl;
+import model.warehouseproductmanager.WarehouseProductManager;
+import model.warehouseproductmanager.WarehouseProductManagerImpl;
 import transferobjects.EmployeeUser;
 import transferobjects.Hello;
 import transferobjects.Product;
@@ -27,12 +29,14 @@ public class DatabaseManagerImpl
     private final CustomerManager customerManager;
     private final ProductManager productManager;
     private final EmployeeManager employeeManager;
+    private final WarehouseProductManager warehouseProductManager;
 
     public DatabaseManagerImpl()
     {
         customerManager = new CustomerManagerImpl();
         productManager = new ProductManagerImpl();
         employeeManager = new EmployeeManagerImpl();
+        warehouseProductManager=new WarehouseProductManagerImpl();
     }
 
     public CustomerManager getCustomerManager()
@@ -49,6 +53,8 @@ public class DatabaseManagerImpl
     {
         return employeeManager;
     }
+
+    public WarehouseProductManager getWarehouseProductManager(){return warehouseProductManager;}
 
     /*
     private ClientDAO clientDAO;
