@@ -96,6 +96,15 @@ public class Handler implements Runnable
                 WarehouseProduct warehouseProduct=databaseManager.getWarehouseProductManager().addWarehouseProduct(warehouseProduct1.getStoreId(),warehouseProduct1.getProductId(), warehouseProduct1.getQuantity());
                 outToClient.writeObject(new Request("AddWarehouseProduct", warehouseProduct));
             }
+            else if("GetAllWPJoin".equals(request.getType())){
+                List<WPJoin> result=databaseManager.getWpJoinManager().getAllWPJoin();
+                outToClient.writeObject(new Request("GetAllWPJoin", result));
+            }
+            else if("GetStoreWPJoin".equals(request.getType())){
+                List<WPJoin> result=databaseManager.getWpJoinManager().getStoreWPJoin((int)request.getArg());
+                outToClient.writeObject(new Request("GetStoreWPJoin", result));
+
+            }
         }
         catch (IOException | ClassNotFoundException e)
         {

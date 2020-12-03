@@ -16,10 +16,9 @@ import model.productmanager.ProductManager;
 import model.productmanager.ProductManagerImpl;
 import model.warehouseproductmanager.WarehouseProductManager;
 import model.warehouseproductmanager.WarehouseProductManagerImpl;
-import transferobjects.EmployeeUser;
-import transferobjects.Hello;
-import transferobjects.Product;
-import transferobjects.CustomerUser;
+import model.wpjoinmanager.WPJoinManager;
+import model.wpjoinmanager.WPJoinManagerImpl;
+import transferobjects.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -30,6 +29,7 @@ public class DatabaseManagerImpl
     private final ProductManager productManager;
     private final EmployeeManager employeeManager;
     private final WarehouseProductManager warehouseProductManager;
+    private final WPJoinManager wpJoinManager;
 
     public DatabaseManagerImpl()
     {
@@ -37,6 +37,7 @@ public class DatabaseManagerImpl
         productManager = new ProductManagerImpl();
         employeeManager = new EmployeeManagerImpl();
         warehouseProductManager=new WarehouseProductManagerImpl();
+        wpJoinManager=new WPJoinManagerImpl();
     }
 
     public CustomerManager getCustomerManager()
@@ -55,6 +56,7 @@ public class DatabaseManagerImpl
     }
 
     public WarehouseProductManager getWarehouseProductManager(){return warehouseProductManager;}
+    public WPJoinManager getWpJoinManager(){return wpJoinManager;}
 
     /*
     private ClientDAO clientDAO;
