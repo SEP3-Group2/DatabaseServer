@@ -34,7 +34,7 @@ public class EmployeeUserDAOImpl implements EmployeeUserDAO
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO\"SEP3\".employee(name, email, password, address, contact, seclevel, positon, storeid) VALUES(?,?,?,?,?,?,?,?)",
+                    "INSERT INTO\"SEP3\".employee(name, email, password, address, contact, seclevel, position, storeid) VALUES(?,?,?,?,?,?,?,?)",
                     PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, employeeUser.getName());
             statement.setString(2, employeeUser.getEmail());
@@ -74,7 +74,7 @@ public class EmployeeUserDAOImpl implements EmployeeUserDAO
                         resultSet.getString("address"),
                         resultSet.getString("contact"),
                         resultSet.getInt("seclevel"),
-                        resultSet.getString("positon"),
+                        resultSet.getString("position"),
                         resultSet.getInt("storeid"),
                         resultSet.getString("password"));
             }

@@ -87,14 +87,26 @@ public class Handler implements Runnable
                 List<WarehouseProduct> result=databaseManager.getWarehouseProductManager().getAllWarehouseProducts();
                 outToClient.writeObject(new Request("GetAllWarehouseProducts", result));
             }
-            else if("GetStoreWarehouseProducts".equals(request.getType())){
+            else if("GetStoreWarehouseProduct".equals(request.getType())){
                 List<WarehouseProduct> result=databaseManager.getWarehouseProductManager().getStoreWarehouseProducts((int)request.getArg());
-                outToClient.writeObject(new Request("GetStoreWarehouseProducts", result));
+                outToClient.writeObject(new Request("GetStoreWarehouseProduct", result));
             }
             else if("AddWarehouseProduct".equals(request.getType())){
                 WarehouseProduct warehouseProduct1=(WarehouseProduct) request.getArg();
                 WarehouseProduct warehouseProduct=databaseManager.getWarehouseProductManager().addWarehouseProduct(warehouseProduct1.getStoreId(),warehouseProduct1.getProductId(), warehouseProduct1.getQuantity());
                 outToClient.writeObject(new Request("AddWarehouseProduct", warehouseProduct));
+            }
+            else if("GetCartProducts".equals(request.getType())){
+                int[] requests = (int[]) request.getArg();
+                int productid = requests[0];
+                int quantity = requests[1];
+                List<CartProduct> result = databaseManager.getWarehouseProductManager().GetCartProducts(productid, quantity);
+                outToClient.writeObject(new Request("GetCartProducts", result));
+            }
+            else if("AddTransaction".equals(request.getType()))
+            {
+                Transaction transaction = databaseManager.getTransactionManager().addTransaction((Transaction) request.getArg());
+                outToClient.writeObject(new Request("AddTransaction", transaction));
             }
         }
         catch (IOException | ClassNotFoundException e)

@@ -2,6 +2,7 @@ package database.warehouseproductDAO;
 
 import database.productDAO.ProductDAOImpl;
 import model.warehouseproductmanager.WarehouseProductManagerImpl;
+import transferobjects.CartProduct;
 import transferobjects.Product;
 import transferobjects.WarehouseProduct;
 
@@ -63,8 +64,8 @@ public class WarehouseProductDAOImpl implements WarehouseProductDAO{
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM \"SEP3\".WarehouseProduct where storeid LIKE ?");
-            statement.setString(1, "%" + storeId + "%");
+                    "SELECT * FROM \"SEP3\".WarehouseProduct where storeid = ?");
+            statement.setInt(1, storeId);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next())
@@ -105,5 +106,42 @@ public class WarehouseProductDAOImpl implements WarehouseProductDAO{
             else
                 throw new SQLException("No keys generated");
         }
+    }
+
+    @Override public List<CartProduct> GetCartProducts(int productid,
+        int quantity) throws SQLException
+    {
+        List<CartProduct> returnList = new ArrayList<CartProduct>();
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT \"SEP3\".product.productid, \"SEP3\".product.title, \"SEP3\".product.category, \"SEP3\".product.price,\n"
+                    + "\"SEP3\".warehouseproduct.storeid, \"SEP3\".warehouseproduct.quantity\n"
+                    + "FROM \"SEP3\".product  \n"
+                    + "INNER JOIN \"SEP3\".warehouseproduct \n"
+                    + "ON (\"SEP3\".product.productid = \"SEP3\".warehouseproduct.productid)\n"
+                    + "WHERE \"SEP3\".product.productid = ? AND \"SEP3\".warehouseproduct.quantity >= ?");
+
+            statement.setInt(1, productid);
+            statement.setInt(2, quantity);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next())
+            {
+                CartProduct content = new CartProduct();
+                content.setId(resultSet.getInt("productid"));
+                content.setTitle(resultSet.getString("title"));
+                content.setCategory(resultSet.getString("category"));
+                content.setPrice(resultSet.getInt("price"));
+                content.setStoreid(resultSet.getInt("storeid"));
+                content.setQuantity(resultSet.getInt("quantity"));
+                returnList.add(content);
+            }
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return returnList;
     }
 }

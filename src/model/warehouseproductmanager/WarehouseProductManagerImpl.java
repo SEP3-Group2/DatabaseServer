@@ -3,6 +3,7 @@ package model.warehouseproductmanager;
 import database.productDAO.ProductDAOImpl;
 import database.warehouseproductDAO.WarehouseProductDAO;
 import database.warehouseproductDAO.WarehouseProductDAOImpl;
+import transferobjects.CartProduct;
 import transferobjects.Product;
 import transferobjects.WarehouseProduct;
 
@@ -62,5 +63,18 @@ public class WarehouseProductManagerImpl implements WarehouseProductManager{
         return null;
     }
 
+    @Override public List<CartProduct> GetCartProducts(int productid,
+        int quantity)
+    {
+        try
+        {
+            return warehouseProductDAO.GetCartProducts(productid,quantity);
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 
 }
