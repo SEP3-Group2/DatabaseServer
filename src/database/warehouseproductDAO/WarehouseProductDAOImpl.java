@@ -77,6 +77,7 @@ public class WarehouseProductDAOImpl implements WarehouseProductDAO{
 
                 returnList.add(content);
             }
+            System.out.println(returnList);
         }
         catch (SQLException throwables)
         {

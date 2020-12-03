@@ -107,6 +107,13 @@ public class Handler implements Runnable
             {
                 Transaction transaction = databaseManager.getTransactionManager().addTransaction((Transaction) request.getArg());
                 outToClient.writeObject(new Request("AddTransaction", transaction));
+            else if("GetAllWPJoin".equals(request.getType())){
+                List<WPJoin> result=databaseManager.getWpJoinManager().getAllWPJoin();
+                outToClient.writeObject(new Request("GetAllWPJoin", result));
+            }
+            else if("GetStoreWPJoin".equals(request.getType())){
+                List<WPJoin> result=databaseManager.getWpJoinManager().getStoreWPJoin((int)request.getArg());
+                outToClient.writeObject(new Request("GetStoreWPJoin", result));
             }
         }
         catch (IOException | ClassNotFoundException e)
