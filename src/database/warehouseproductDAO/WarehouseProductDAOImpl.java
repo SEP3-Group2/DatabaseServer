@@ -63,8 +63,8 @@ public class WarehouseProductDAOImpl implements WarehouseProductDAO{
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM \"SEP3\".WarehouseProduct where storeid LIKE ?");
-            statement.setString(1, "%" + storeId + "%");
+                    "SELECT * FROM \"SEP3\".WarehouseProduct where storeid = ?");
+            statement.setInt(1, storeId);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next())
@@ -76,6 +76,7 @@ public class WarehouseProductDAOImpl implements WarehouseProductDAO{
 
                 returnList.add(content);
             }
+            System.out.println(returnList);
         }
         catch (SQLException throwables)
         {
