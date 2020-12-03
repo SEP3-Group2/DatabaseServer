@@ -3,6 +3,7 @@ package database.warehouseproductDAO;
 import database.productDAO.ProductDAOImpl;
 import model.warehouseproductmanager.WarehouseProductManagerImpl;
 import transferobjects.CartProduct;
+import transferobjects.OrderProduct;
 import transferobjects.Product;
 import transferobjects.WarehouseProduct;
 
@@ -145,4 +146,60 @@ public class WarehouseProductDAOImpl implements WarehouseProductDAO{
         }
         return returnList;
     }
+    @Override
+    public void OrderProductFromManufacturer(OrderProduct orderProduct) throws SQLException {
+        try (Connection connection = getConnection())
+        {
+
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE \"SEP3\".warehouseproduct WHERE storeid =? SET quantity=?");
+            statement.setInt(1, orderProduct.getWarehouseProduct().getStoreId());
+            statement.setInt(2, orderProduct.getWarehouseProduct().getQuantity()+orderProduct.getOrderCount());
+            statement.executeUpdate();
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void OrderProductFromStore(OrderProduct orderProduct) throws SQLException {
+        try (Connection connection = getConnection())
+        {
+
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE \"SEP3\".warehouseproduct WHERE storeid =? SET quantity=?");
+            statement.setInt(1, orderProduct.getWarehouseProduct().getStoreId());
+            statement.setInt(2, orderProduct.getWarehouseProduct().getQuantity()+orderProduct.getOrderCount());
+            statement.executeUpdate();
+
+            PreparedStatement statement2 = connection.prepareStatement(
+                    "UPDATE \"SEP3\".warehouseproduct WHERE storeid =? SET quantity=?");
+            statement2.setInt(1, orderProduct.getStoreId());
+            statement2.setInt(2, orderProduct.getWarehouseProduct().getQuantity()-orderProduct.getOrderCount());
+            statement2.executeUpdate();
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void DecrementProductQuantity(OrderProduct orderProduct) throws SQLException {
+        try (Connection connection = getConnection())
+        {
+
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE \"SEP3\".warehouseproduct SET quantity=?");
+            statement.setInt(1, orderProduct.getWarehouseProduct().getQuantity()-orderProduct.getOrderCount());
+            statement.executeUpdate();            
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+    }
+
 }

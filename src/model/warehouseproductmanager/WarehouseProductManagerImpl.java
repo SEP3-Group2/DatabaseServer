@@ -4,6 +4,7 @@ import database.productDAO.ProductDAOImpl;
 import database.warehouseproductDAO.WarehouseProductDAO;
 import database.warehouseproductDAO.WarehouseProductDAOImpl;
 import transferobjects.CartProduct;
+import transferobjects.OrderProduct;
 import transferobjects.Product;
 import transferobjects.WarehouseProduct;
 
@@ -75,6 +76,42 @@ public class WarehouseProductManagerImpl implements WarehouseProductManager{
             throwables.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void OrderProductFromManufacturer(OrderProduct orderProduct) {
+        try
+        {
+            warehouseProductDAO.OrderProductFromManufacturer(orderProduct);
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void OrderProductFromStore(OrderProduct orderProduct) {
+        try
+        {
+            warehouseProductDAO.OrderProductFromStore(orderProduct);
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void DecrementProductQuantity(OrderProduct orderProduct) {
+        try
+        {
+            warehouseProductDAO.DecrementProductQuantity(orderProduct);
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
     }
 
 }
