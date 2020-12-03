@@ -74,7 +74,7 @@ public class EmployeeUserDAOImpl implements EmployeeUserDAO
                         resultSet.getString("address"),
                         resultSet.getString("contact"),
                         resultSet.getInt("seclevel"),
-                        resultSet.getString("positon"),
+                        resultSet.getString("position"),
                         resultSet.getInt("storeid"),
                         resultSet.getString("password"));
             }
