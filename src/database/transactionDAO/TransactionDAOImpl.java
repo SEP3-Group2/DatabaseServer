@@ -38,9 +38,6 @@ public class TransactionDAOImpl implements TransactionDAO
           "INSERT INTO\"SEP3\".transaction(storeid, date, totalprice, customername, phone, address, deliverymethod,email) VALUES(?,?,?,?,?,?,?,?)",
           PreparedStatement.RETURN_GENERATED_KEYS);
 
-      System.out.println(transaction.getTotalPrice());
-      System.out.println(transaction.getCustomerName());
-
       statement.setInt(1, transaction.getStoreid());
       statement.setDate(2, transaction.getDate());
       statement.setDouble(3, transaction.getTotalPrice());
@@ -63,6 +60,25 @@ public class TransactionDAOImpl implements TransactionDAO
     }
   }
 
+  @Override public int getLastTransactionID() throws SQLException
+  {
+    int content = 0;
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT MAX(transactionid) FROM \"SEP3\".transaction;");
+      ResultSet resultSet = statement.executeQuery();
 
+      if (resultSet.next())
+      {
+        content = resultSet.getInt("max");
+      }
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return content;
+  }
 
 }
