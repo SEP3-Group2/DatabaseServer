@@ -36,4 +36,17 @@ public class TransactionManagerImpl implements TransactionManager
     }
     return null;
   }
+
+  @Override public int getLastTransactionID()
+  {
+    try
+    {
+      return transactionDAO.getLastTransactionID();
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return 0;
+  }
 }

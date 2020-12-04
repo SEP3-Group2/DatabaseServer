@@ -7,4 +7,6 @@ public interface TransactionManager
 {
   Transaction addTransaction(Transaction transaction);
 
+  int getLastTransactionID();
+
 }

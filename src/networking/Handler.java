@@ -92,6 +92,11 @@ public class Handler implements Runnable
                 int returnID = databaseManager.getProductManager().getLastProductID();
                 outToClient.writeObject(new Request("GetLastProductID", returnID));
             }
+            else if ("GetLastTransactionID".equals(request.getType()))
+            {
+                int returnID = databaseManager.getTransactionManager().getLastTransactionID();
+                outToClient.writeObject(new Request("GetLastTransactionID", returnID));
+            }
             else if ("GetAllWarehouseProducts".equals(request.getType()))
             {
                 List<WarehouseProduct> result = databaseManager.getWarehouseProductManager().getAllWarehouseProducts();
@@ -120,6 +125,11 @@ public class Handler implements Runnable
             {
                 Transaction transaction = databaseManager.getTransactionManager().addTransaction((Transaction) request.getArg());
                 outToClient.writeObject(new Request("AddTransaction", transaction));
+            }
+            else if ("AddTransactionProduct".equals(request.getType()))
+            {
+                TransactionProduct transactionProduct = databaseManager.getTransactionProductManager().addTransactionProduct((TransactionProduct) request.getArg());
+                outToClient.writeObject(new Request("AddTransactionProduct", transactionProduct));
             }
             else if ("GetAllWPJoin".equals(request.getType()))
             {
