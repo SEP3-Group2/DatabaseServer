@@ -131,6 +131,16 @@ public class Handler implements Runnable
                 List<WPJoin> result = databaseManager.getWpJoinManager().getStoreWPJoin((int) request.getArg());
                 outToClient.writeObject(new Request("GetStoreWPJoin", result));
             }
+            else if("GetCustomerById".equals(request.getType()))
+            {
+                CustomerUser result = databaseManager.getCustomerManager().getCustomerById((int) request.getArg());
+                outToClient.writeObject(new Request("GetCustomerById", result));
+            }
+            else if ("UpdateCustomerInfo".equals(request.getType())){
+                System.out.println("handler");
+               CustomerUser result = databaseManager.getCustomerManager().updateCustomerInfo((CustomerUser) request.getArg());
+               outToClient.writeObject(new Request("UpdateCustomerInfo", result));
+            }
         }
         catch (IOException |
                 ClassNotFoundException e)

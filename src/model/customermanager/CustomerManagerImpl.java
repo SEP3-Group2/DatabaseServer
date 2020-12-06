@@ -64,4 +64,31 @@ public class CustomerManagerImpl implements CustomerManager
         }
         return null;
     }
+
+    @Override public CustomerUser getCustomerById(int id)
+    {
+        try
+        {
+            return customerUserDAO.getCustomerById(id);
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override public CustomerUser updateCustomerInfo(CustomerUser customerUser)
+    {
+        try
+        {
+          customerUserDAO.updateCustomerInfo(customerUser);
+
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 }
