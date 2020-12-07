@@ -2,10 +2,13 @@ package database.transactionproduct;
 
 import database.transactionDAO.TransactionDAO;
 import database.transactionDAO.TransactionDAOImpl;
+import transferobjects.HistoryProduct;
 import transferobjects.Transaction;
 import transferobjects.TransactionProduct;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionProductDAOImpl implements TransactionProductDAO
 {
@@ -51,5 +54,40 @@ public class TransactionProductDAOImpl implements TransactionProductDAO
         return new TransactionProduct();
 
     }
+  }
+
+  @Override public List<HistoryProduct> getTransProById(int transid)
+      throws SQLException
+  {
+    List<HistoryProduct> returnList = new ArrayList<HistoryProduct>();
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT \"SEP3\".transactionproduct.transactionid, \"SEP3\".product.title, \"SEP3\".product.category, \"SEP3\".transactionproduct.quantity\n"
+              + "FROM \"SEP3\".product\n"
+              + "INNER JOIN \"SEP3\".transactionproduct\n"
+              + "ON (\"SEP3\".product.productid = \"SEP3\".transactionproduct.productid)\n"
+              + "WHERE \"SEP3\".transactionproduct.transactionid = ?");
+      statement.setInt(1, transid );
+
+      ResultSet resultSet = statement.executeQuery();
+
+      while (resultSet.next())
+      {
+        HistoryProduct content = new HistoryProduct();
+        content.setTransactionid(resultSet.getInt("transactionid"));
+        content.setTitle(resultSet.getString("title"));
+        content.setCategory(resultSet.getString("category"));
+        content.setQuantity(resultSet.getInt("quantity"));
+
+
+        returnList.add(content);
+      }
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return returnList;
   }
 }
