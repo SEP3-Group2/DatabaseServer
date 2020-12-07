@@ -92,6 +92,11 @@ public class Handler implements Runnable
                 int returnID = databaseManager.getProductManager().getLastProductID();
                 outToClient.writeObject(new Request("GetLastProductID", returnID));
             }
+            else if ("GetLastTransactionID".equals(request.getType()))
+            {
+                int returnID = databaseManager.getTransactionManager().getLastTransactionID();
+                outToClient.writeObject(new Request("GetLastTransactionID", returnID));
+            }
             else if ("GetAllWarehouseProducts".equals(request.getType()))
             {
                 List<WarehouseProduct> result = databaseManager.getWarehouseProductManager().getAllWarehouseProducts();
@@ -121,6 +126,11 @@ public class Handler implements Runnable
                 Transaction transaction = databaseManager.getTransactionManager().addTransaction((Transaction) request.getArg());
                 outToClient.writeObject(new Request("AddTransaction", transaction));
             }
+            else if ("AddTransactionProduct".equals(request.getType()))
+            {
+                TransactionProduct transactionProduct = databaseManager.getTransactionProductManager().addTransactionProduct((TransactionProduct) request.getArg());
+                outToClient.writeObject(new Request("AddTransactionProduct", transactionProduct));
+            }
             else if ("GetAllWPJoin".equals(request.getType()))
             {
                 List<WPJoin> result = databaseManager.getWpJoinManager().getAllWPJoin();
@@ -140,6 +150,39 @@ public class Handler implements Runnable
                 System.out.println("handler");
                CustomerUser result = databaseManager.getCustomerManager().updateCustomerInfo((CustomerUser) request.getArg());
                outToClient.writeObject(new Request("UpdateCustomerInfo", result));
+            else if("OrderProductFromManufacturer".equals(request.getType()))
+            {
+                databaseManager.getWarehouseProductManager().OrderProductFromManufacturer((OrderProduct)request.getArg());
+            }
+            else if("OrderProductFromStore".equals(request.getType()))
+            {
+                databaseManager.getWarehouseProductManager().OrderProductFromStore((OrderProduct)request.getArg());
+            }
+            else if("DecrementProductQuantity".equals(request.getType())){
+                databaseManager.getWarehouseProductManager().DecrementProductQuantity((OrderProduct)request.getArg());
+            }
+            else if("GetWarehouseProductFromStoresById".equals(request.getType())){
+
+                List<WarehouseProduct> result=databaseManager.getWarehouseProductManager().getWarehouseProductFromStoresById((WarehouseProduct)request.getArg());
+                outToClient.writeObject(new Request("GetWarehouseProductFromStoresById", result));
+            }
+            else if("ModifyProduct".equals(request.getType())){
+                databaseManager.getProductManager().modifyProduct((Product)request.getArg());
+            }
+            else if("GetAllEmployeeUsers".equals(request.getType())){
+                List<EmployeeUser> result = databaseManager.getEmployeeManager().getAllEmployeeUsers();
+                outToClient.writeObject(new Request("GetAllUsers", result));
+            }
+            else if("GetEmployeeByID".equals(request.getType())){
+                EmployeeUser result = databaseManager.getEmployeeManager().getEmployeeByID((int)request.getArg());
+                outToClient.writeObject(new Request("GetEmployeeByID", result));
+            }
+            else if("UpdateEmployeeUser".equals(request.getType())){
+                EmployeeUser result = databaseManager.getEmployeeManager().updateEmployeeUser((EmployeeUser)request.getArg());
+                outToClient.writeObject(new Request("UpdateEmployeeUser", result));
+            }
+            else if("DeleteEmployeeUser".equals(request.getType())){
+                databaseManager.getEmployeeManager().deleteUser((int)request.getArg());
             }
         }
         catch (IOException |

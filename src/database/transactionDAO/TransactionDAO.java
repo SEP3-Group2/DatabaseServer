@@ -7,4 +7,5 @@ import java.sql.SQLException;
 public interface TransactionDAO
 {
   Transaction addTransaction(Transaction transaction) throws SQLException;
+  int getLastTransactionID() throws SQLException;
 }

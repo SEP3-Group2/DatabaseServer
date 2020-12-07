@@ -1,6 +1,7 @@
 package database.warehouseproductDAO;
 
 import transferobjects.CartProduct;
+import transferobjects.OrderProduct;
 import transferobjects.Product;
 import transferobjects.WarehouseProduct;
 
@@ -13,4 +14,8 @@ public interface WarehouseProductDAO {
     WarehouseProduct addWarehouseProduct(int storeid, int productid, int quantity) throws SQLException;
 
     List<CartProduct> GetCartProducts(int productid, int quantity) throws SQLException;
+    void OrderProductFromManufacturer(OrderProduct orderProduct) throws SQLException;
+    void OrderProductFromStore(OrderProduct orderProduct) throws SQLException;
+    void DecrementProductQuantity(OrderProduct orderProduct) throws SQLException;
+    List<WarehouseProduct> getWarehouseProductFromStoresById(WarehouseProduct warehouseProduct) throws SQLException;
 }

@@ -16,6 +16,8 @@ import model.productmanager.ProductManager;
 import model.productmanager.ProductManagerImpl;
 import model.transactionmanager.TransactionManager;
 import model.transactionmanager.TransactionManagerImpl;
+import model.transactionproductmanager.TransactionProductManager;
+import model.transactionproductmanager.TransactionProductManagerImpl;
 import model.warehouseproductmanager.WarehouseProductManager;
 import model.warehouseproductmanager.WarehouseProductManagerImpl;
 import model.wpjoinmanager.WPJoinManager;
@@ -32,6 +34,7 @@ public class DatabaseManagerImpl
     private final EmployeeManager employeeManager;
     private final WarehouseProductManager warehouseProductManager;
     private final TransactionManager transactionManager;
+    private final TransactionProductManager transactionProductManager;
     private final WPJoinManager wpJoinManager;
 
     public DatabaseManagerImpl()
@@ -41,7 +44,13 @@ public class DatabaseManagerImpl
         employeeManager = new EmployeeManagerImpl();
         warehouseProductManager=new WarehouseProductManagerImpl();
         transactionManager = new TransactionManagerImpl();
+        transactionProductManager = new TransactionProductManagerImpl();
         wpJoinManager=new WPJoinManagerImpl();
+    }
+
+    public TransactionProductManager getTransactionProductManager()
+    {
+        return transactionProductManager;
     }
 
     public CustomerManager getCustomerManager()

@@ -3,6 +3,7 @@ package database.warehouseproductDAO;
 import database.productDAO.ProductDAOImpl;
 import model.warehouseproductmanager.WarehouseProductManagerImpl;
 import transferobjects.CartProduct;
+import transferobjects.OrderProduct;
 import transferobjects.Product;
 import transferobjects.WarehouseProduct;
 
@@ -77,7 +78,6 @@ public class WarehouseProductDAOImpl implements WarehouseProductDAO{
 
                 returnList.add(content);
             }
-            System.out.println(returnList);
         }
         catch (SQLException throwables)
         {
@@ -145,4 +145,109 @@ public class WarehouseProductDAOImpl implements WarehouseProductDAO{
         }
         return returnList;
     }
+    @Override
+    public void OrderProductFromManufacturer(OrderProduct orderProduct) throws SQLException {
+        try (Connection connection = getConnection())
+        {
+
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE \"SEP3\".warehouseproduct SET quantity=? WHERE storeid =? AND productid=? ");
+            statement.setInt(1, orderProduct.getWarehouseProduct().getQuantity()+orderProduct.getOrderCount());
+            statement.setInt(2, orderProduct.getWarehouseProduct().getStoreId());
+            statement.setInt(3, orderProduct.getWarehouseProduct().getProductId());
+
+            statement.executeUpdate();
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void OrderProductFromStore(OrderProduct orderProduct) throws SQLException {
+        try (Connection connection = getConnection())
+        {
+
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE \"SEP3\".warehouseproduct SET quantity=? WHERE storeid =? AND productid=? ");
+            statement.setInt(1, orderProduct.getWarehouseProduct().getQuantity()+orderProduct.getOrderCount());
+            statement.setInt(2, orderProduct.getWarehouseProduct().getStoreId());
+            statement.setInt(3,orderProduct.getWarehouseProduct().getProductId());
+            statement.executeUpdate();
+
+            PreparedStatement statement2 = connection.prepareStatement(
+                    "SELECT * FROM\"SEP3\".warehouseproduct WHERE storeid =? AND productid=?");
+            statement2.setInt(1, orderProduct.getStoreId());
+            statement2.setInt(2, orderProduct.getWarehouseProduct().getProductId());
+            ResultSet resultSet = statement2.executeQuery();
+
+            WarehouseProduct content = new WarehouseProduct();
+            while (resultSet.next())
+            {
+                content.setStoreId(resultSet.getInt("storeid"));
+                content.setProductId(resultSet.getInt("productid"));
+                content.setQuantity(resultSet.getInt("quantity"));
+            }
+
+            PreparedStatement statement3 = connection.prepareStatement(
+                    "UPDATE \"SEP3\".warehouseproduct SET quantity=? WHERE storeid =? AND productid=?");
+            statement3.setInt(1, content.getQuantity()-orderProduct.getOrderCount());
+            statement3.setInt(2, orderProduct.getStoreId());
+            statement3.setInt(3, orderProduct.getWarehouseProduct().getProductId());
+            statement3.executeUpdate();
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void DecrementProductQuantity(OrderProduct orderProduct) throws SQLException {
+        try (Connection connection = getConnection())
+        {
+
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE \"SEP3\".warehouseproduct SET quantity=? WHERE storeid=? AND productid=?");
+            statement.setInt(1, orderProduct.getWarehouseProduct().getQuantity()-orderProduct.getOrderCount());
+            statement.setInt(2, orderProduct.getWarehouseProduct().getStoreId());
+            statement.setInt(3, orderProduct.getWarehouseProduct().getProductId());
+            statement.executeUpdate();
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<WarehouseProduct> getWarehouseProductFromStoresById(WarehouseProduct warehouseProduct) throws SQLException {
+        List<WarehouseProduct> returnList = new ArrayList<WarehouseProduct>();
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM \"SEP3\".WarehouseProduct WHERE productid = ? EXCEPT SELECT * FROM \"SEP3\".WarehouseProduct WHERE storeid=?");
+            statement.setInt(1, warehouseProduct.getProductId());
+            statement.setInt(2, warehouseProduct.getStoreId());
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next())
+            {
+                WarehouseProduct content = new WarehouseProduct();
+
+                content.setStoreId(resultSet.getInt("storeid"));
+                content.setProductId(resultSet.getInt("productid"));
+                content.setQuantity(resultSet.getInt("quantity"));
+                returnList.add(content);
+            }
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return returnList;
+
+    }
+
 }
