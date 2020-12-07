@@ -10,4 +10,6 @@ public interface CustomerManager
     void registerCustomerUser(CustomerUser customerUser);
     List<CustomerUser> getAllUsers();
     CustomerUser getCustomerUser(String email);
+    CustomerUser getCustomerById(int id);
+    CustomerUser updateCustomerInfo(CustomerUser customerUser);
 }
