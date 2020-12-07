@@ -154,10 +154,12 @@ public class Handler implements Runnable
                 CustomerUser result = databaseManager.getCustomerManager().getCustomerById((int) request.getArg());
                 outToClient.writeObject(new Request("GetCustomerById", result));
             }
-            else if ("UpdateCustomerInfo".equals(request.getType())){
+            else if ("UpdateCustomerInfo".equals(request.getType()))
+            {
                 System.out.println("handler");
-               CustomerUser result = databaseManager.getCustomerManager().updateCustomerInfo((CustomerUser) request.getArg());
-               outToClient.writeObject(new Request("UpdateCustomerInfo", result));
+                CustomerUser result = databaseManager.getCustomerManager().updateCustomerInfo((CustomerUser) request.getArg());
+                outToClient.writeObject(new Request("UpdateCustomerInfo", result));
+            }
             else if("OrderProductFromManufacturer".equals(request.getType()))
             {
                 databaseManager.getWarehouseProductManager().OrderProductFromManufacturer((OrderProduct)request.getArg());
@@ -176,6 +178,7 @@ public class Handler implements Runnable
             else if("GetHistoryProducts".equals(request.getType())){
                 List<HistoryProduct> result = databaseManager.getTransactionProductManager().getTransProById((int)request.getArg());
                 outToClient.writeObject(new Request("GetHistoryProducts", result));
+            }
             else if("GetWarehouseProductFromStoresById".equals(request.getType())){
 
                 List<WarehouseProduct> result=databaseManager.getWarehouseProductManager().getWarehouseProductFromStoresById((WarehouseProduct)request.getArg());
