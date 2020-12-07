@@ -114,4 +114,17 @@ public class WarehouseProductManagerImpl implements WarehouseProductManager{
         }
     }
 
+    @Override
+    public List<WarehouseProduct> getWarehouseProductFromStoresById(WarehouseProduct warehouseProduct) {
+        try
+        {
+            return warehouseProductDAO.getWarehouseProductFromStoresById(warehouseProduct);
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
 }

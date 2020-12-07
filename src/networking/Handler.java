@@ -142,6 +142,14 @@ public class Handler implements Runnable
             else if("DecrementProductQuantity".equals(request.getType())){
                 databaseManager.getWarehouseProductManager().DecrementProductQuantity((OrderProduct)request.getArg());
             }
+            else if("GetWarehouseProductFromStoresById".equals(request.getType())){
+
+                List<WarehouseProduct> result=databaseManager.getWarehouseProductManager().getWarehouseProductFromStoresById((WarehouseProduct)request.getArg());
+                outToClient.writeObject(new Request("GetWarehouseProductFromStoresById", result));
+            }
+            else if("ModifyProduct".equals(request.getType())){
+                databaseManager.getProductManager().modifyProduct((Product)request.getArg());
+            }
         }
         catch (IOException |
                 ClassNotFoundException e)
