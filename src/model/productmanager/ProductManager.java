@@ -12,6 +12,7 @@ public interface ProductManager
     List<Product> getTitleCategoryPriceFilteredProducts(String title, String category, String price);
 
     Product addProduct(String title, String category, String description, double price);
+    void modifyProduct(Product product);
 
     int getLastProductID();
 }
