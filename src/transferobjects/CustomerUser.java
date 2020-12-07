@@ -24,10 +24,46 @@ public class CustomerUser implements Serializable
         this.phone = phone;
         this.birthday = birthday;
     }
-
     public CustomerUser()
     {
 
+
+    }
+
+
+    public void setUserID(int userID)
+    {
+        this.userID = userID;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public void setAddress(String address)
+    {
+        this.address = address;
+    }
+
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
+    }
+
+    public void setBirthday(Date birthday)
+    {
+        this.birthday = birthday;
     }
 
     public int getUserID()

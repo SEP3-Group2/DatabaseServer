@@ -149,6 +149,15 @@ public class Handler implements Runnable
                 List<WPJoin> result = databaseManager.getWpJoinManager().getStoreWPJoin((int) request.getArg());
                 outToClient.writeObject(new Request("GetStoreWPJoin", result));
             }
+            else if("GetCustomerById".equals(request.getType()))
+            {
+                CustomerUser result = databaseManager.getCustomerManager().getCustomerById((int) request.getArg());
+                outToClient.writeObject(new Request("GetCustomerById", result));
+            }
+            else if ("UpdateCustomerInfo".equals(request.getType())){
+                System.out.println("handler");
+               CustomerUser result = databaseManager.getCustomerManager().updateCustomerInfo((CustomerUser) request.getArg());
+               outToClient.writeObject(new Request("UpdateCustomerInfo", result));
             else if("OrderProductFromManufacturer".equals(request.getType()))
             {
                 databaseManager.getWarehouseProductManager().OrderProductFromManufacturer((OrderProduct)request.getArg());
@@ -167,6 +176,28 @@ public class Handler implements Runnable
             else if("GetHistoryProducts".equals(request.getType())){
                 List<HistoryProduct> result = databaseManager.getTransactionProductManager().getTransProById((int)request.getArg());
                 outToClient.writeObject(new Request("GetHistoryProducts", result));
+            else if("GetWarehouseProductFromStoresById".equals(request.getType())){
+
+                List<WarehouseProduct> result=databaseManager.getWarehouseProductManager().getWarehouseProductFromStoresById((WarehouseProduct)request.getArg());
+                outToClient.writeObject(new Request("GetWarehouseProductFromStoresById", result));
+            }
+            else if("ModifyProduct".equals(request.getType())){
+                databaseManager.getProductManager().modifyProduct((Product)request.getArg());
+            }
+            else if("GetAllEmployeeUsers".equals(request.getType())){
+                List<EmployeeUser> result = databaseManager.getEmployeeManager().getAllEmployeeUsers();
+                outToClient.writeObject(new Request("GetAllUsers", result));
+            }
+            else if("GetEmployeeByID".equals(request.getType())){
+                EmployeeUser result = databaseManager.getEmployeeManager().getEmployeeByID((int)request.getArg());
+                outToClient.writeObject(new Request("GetEmployeeByID", result));
+            }
+            else if("UpdateEmployeeUser".equals(request.getType())){
+                EmployeeUser result = databaseManager.getEmployeeManager().updateEmployeeUser((EmployeeUser)request.getArg());
+                outToClient.writeObject(new Request("UpdateEmployeeUser", result));
+            }
+            else if("DeleteEmployeeUser".equals(request.getType())){
+                databaseManager.getEmployeeManager().deleteUser((int)request.getArg());
             }
         }
         catch (IOException |

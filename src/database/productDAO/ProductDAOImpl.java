@@ -200,6 +200,23 @@ public class ProductDAOImpl implements ProductDAO
   }
 
   @Override
+  public void modifyProduct(Product product) throws SQLException {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+              "UPDATE \"SEP3\".product SET title=?, category=?, description=?, price=? WHERE productid=?",
+              PreparedStatement.RETURN_GENERATED_KEYS);
+      statement.setString(1, product.getTitle());
+      statement.setString(2, product.getCategory());
+      statement.setString(3, product.getDescription());
+      statement.setDouble(4, product.getPrice());
+      statement.setInt(5, product.getId());
+      
+      statement.executeUpdate();
+    }
+  }
+
+  @Override
   public void addImageToProduct(int productID, String base64String) throws SQLException
   {
     File file = new File("");

@@ -92,6 +92,18 @@ public class ProductManagerImpl implements ProductManager
     }
 
     @Override
+    public void modifyProduct(Product product) {
+        try
+        {
+            productDAO.modifyProduct(product);
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public int getLastProductID()
     {
         try
