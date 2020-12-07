@@ -1,9 +1,12 @@
 package database.transactionDAO;
 
 import database.warehouseproductDAO.WarehouseProductDAOImpl;
+import transferobjects.Product;
 import transferobjects.Transaction;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionDAOImpl implements TransactionDAO
 {
@@ -79,6 +82,40 @@ public class TransactionDAOImpl implements TransactionDAO
       throwables.printStackTrace();
     }
     return content;
+  }
+
+  @Override public List<Transaction> GetTransactionsByEmail(String email) throws SQLException
+  {
+    List<Transaction> returnList = new ArrayList<Transaction>();
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM \"SEP3\".Transaction where email LIKE ?");
+      statement.setString(1, "%" + email + "%");
+
+      ResultSet resultSet = statement.executeQuery();
+
+      while (resultSet.next())
+      {
+        Transaction content = new Transaction();
+        content.setId(resultSet.getInt("transactionid"));
+        content.setStoreid(resultSet.getInt("storeid"));
+        content.setDate(resultSet.getDate("date"));
+        content.setTotalPrice(resultSet.getDouble("totalprice"));
+        content.setCustomerName(resultSet.getString("customername"));
+        content.setEmail(resultSet.getString("email"));
+        content.setPhone(resultSet.getString("phone"));
+        content.setAddress(resultSet.getString("address"));
+        content.setDeliverymethod(resultSet.getString("deliverymethod"));
+
+        returnList.add(content);
+      }
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return returnList;
   }
 
 }

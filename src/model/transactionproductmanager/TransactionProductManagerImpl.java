@@ -5,10 +5,12 @@ import database.transactionDAO.TransactionDAOImpl;
 import database.transactionproduct.TransactionProductDAO;
 import database.transactionproduct.TransactionProductDAOImpl;
 import model.transactionmanager.TransactionManager;
+import transferobjects.HistoryProduct;
 import transferobjects.Transaction;
 import transferobjects.TransactionProduct;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class TransactionProductManagerImpl implements TransactionProductManager
 {
@@ -34,6 +36,19 @@ public class TransactionProductManagerImpl implements TransactionProductManager
     catch (SQLException e)
     {
       e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public List<HistoryProduct> getTransProById(int transid)
+  {
+    try
+    {
+      return transactionProductDAO.getTransProById(transid);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
     }
     return null;
   }

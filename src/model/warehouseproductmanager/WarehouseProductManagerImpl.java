@@ -78,6 +78,20 @@ public class WarehouseProductManagerImpl implements WarehouseProductManager{
         return null;
     }
 
+    @Override public List<CartProduct> GetNotCartProducts(int productid,
+        int quantity)
+    {
+        try
+        {
+            return warehouseProductDAO.GetNotCartProducts(productid,quantity);
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
     public void OrderProductFromManufacturer(OrderProduct orderProduct) {
         try

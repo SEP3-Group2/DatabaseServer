@@ -121,6 +121,14 @@ public class Handler implements Runnable
                 List<CartProduct> result = databaseManager.getWarehouseProductManager().GetCartProducts(productid, quantity);
                 outToClient.writeObject(new Request("GetCartProducts", result));
             }
+            else if ("GetNotCartProducts".equals(request.getType()))
+            {
+                int[] requests = (int[]) request.getArg();
+                int productid = requests[0];
+                int quantity = requests[1];
+                List<CartProduct> result = databaseManager.getWarehouseProductManager().GetNotCartProducts(productid, quantity);
+                outToClient.writeObject(new Request("GetNotCartProducts", result));
+            }
             else if ("AddTransaction".equals(request.getType()))
             {
                 Transaction transaction = databaseManager.getTransactionManager().addTransaction((Transaction) request.getArg());
@@ -151,6 +159,14 @@ public class Handler implements Runnable
             }
             else if("DecrementProductQuantity".equals(request.getType())){
                 databaseManager.getWarehouseProductManager().DecrementProductQuantity((OrderProduct)request.getArg());
+            }
+            else if("GetTransactionsByEmail".equals(request.getType())){
+                List<Transaction> result = databaseManager.getTransactionManager().GetTransactionsByEmail((String)request.getArg());
+                outToClient.writeObject(new Request("GetTransactionsByEmail", result));
+            }
+            else if("GetHistoryProducts".equals(request.getType())){
+                List<HistoryProduct> result = databaseManager.getTransactionProductManager().getTransProById((int)request.getArg());
+                outToClient.writeObject(new Request("GetHistoryProducts", result));
             }
         }
         catch (IOException |

@@ -8,6 +8,7 @@ import transferobjects.Transaction;
 import transferobjects.WarehouseProduct;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class TransactionManagerImpl implements TransactionManager
 {
@@ -48,5 +49,18 @@ public class TransactionManagerImpl implements TransactionManager
       throwables.printStackTrace();
     }
     return 0;
+  }
+
+  @Override public List<Transaction> GetTransactionsByEmail(String email)
+  {
+    try
+    {
+      return transactionDAO.GetTransactionsByEmail(email);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
   }
 }
