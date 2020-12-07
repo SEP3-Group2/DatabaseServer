@@ -1,6 +1,8 @@
 package transferobjects;
 
-public class OrderProduct {
+import java.io.Serializable;
+
+public class OrderProduct implements Serializable {
     private WarehouseProduct warehouseProduct;
     private int orderCount;
     private int storeId;
