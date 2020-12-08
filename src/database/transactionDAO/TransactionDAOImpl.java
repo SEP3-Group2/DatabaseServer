@@ -3,6 +3,7 @@ package database.transactionDAO;
 import database.warehouseproductDAO.WarehouseProductDAOImpl;
 import transferobjects.Product;
 import transferobjects.Transaction;
+import transferobjects.WarehouseProduct;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -116,6 +117,48 @@ public class TransactionDAOImpl implements TransactionDAO
       throwables.printStackTrace();
     }
     return returnList;
+  }
+
+  @Override public Transaction UpdateTransactionToReady(int id)
+      throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "UPDATE \"SEP3\".transaction SET deliverymethod='Ready for pickup' WHERE transactionid=?;");
+      statement.setInt(1, id);
+
+      statement.executeUpdate();
+
+      System.out.println("Transaction updated to ready for pickup");
+      return new Transaction();
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public Transaction UpdateTransactionToDelivered(int id)
+      throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "UPDATE \"SEP3\".transaction SET deliverymethod='Delivered' WHERE transactionid=?;");
+      statement.setInt(1, id);
+
+      statement.executeUpdate();
+
+      System.out.println("Transaction updated to delivered");
+      return new Transaction();
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
   }
 
 }

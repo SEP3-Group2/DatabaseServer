@@ -6,6 +6,7 @@ import database.transactionproduct.TransactionProductDAO;
 import database.transactionproduct.TransactionProductDAOImpl;
 import model.transactionmanager.TransactionManager;
 import transferobjects.HistoryProduct;
+import transferobjects.ReserveHistory;
 import transferobjects.Transaction;
 import transferobjects.TransactionProduct;
 
@@ -45,6 +46,47 @@ public class TransactionProductManagerImpl implements TransactionProductManager
     try
     {
       return transactionProductDAO.getTransProById(transid);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public List<ReserveHistory> getAllReserveHistory()
+  {
+    try
+    {
+      return transactionProductDAO.getAllReserveHistory();
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public List<ReserveHistory> getReserveHistoryByStoreEmail(
+      int storeid, String email)
+  {
+    try
+    {
+      return transactionProductDAO.getReserveHistoryByStoreEmail(storeid,email);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public List<ReserveHistory> getReserveHistoryByStoreEmailDelivery(
+      int storeid, String email, String deliverymethod)
+  {
+    try
+    {
+      return transactionProductDAO.getReserveHistoryByStoreEmailDelivery(storeid, email, deliverymethod);
     }
     catch (SQLException throwables)
     {

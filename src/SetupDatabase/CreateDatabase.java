@@ -425,18 +425,16 @@ public class CreateDatabase
     }
 
     sql = "CREATE TABLE IF NOT EXISTS \"SEP3\".feedback\n" + "(\n"
-        + "    feedbackid integer NOT NULL DEFAULT nextval('\"SEP3\".feedback_feedbackid_seq'::regclass) ,\n"
-        + "    productid integer NOT NULL ,\n"
-        + "    feedback \"SEP3\".d_description COLLATE pg_catalog.\"default\" NOT NULL,\n"
-        + "    customerid integer NOT NULL ,\n"
-        + "    CONSTRAINT feedback_pkey PRIMARY KEY (feedbackid),\n"
+        + "feedbackid integer NOT NULL DEFAULT nextval('\"SEP3\".feedback_feedbackid_seq'::regclass) ,\n"
+        + "productid integer NOT NULL ,\n"
+        + "customername \"SEP3\".d_string COLLATE pg_catalog.\"default\" NOT NULL,\n"
+        + "feedback \"SEP3\".d_description COLLATE pg_catalog.\"default\" NOT NULL,\n"
+        + "starrating integer NOT NULL,\n"
+        + "CONSTRAINT feedback_pkey PRIMARY KEY (feedbackid),\n"
         + "CONSTRAINT feedback_productid_fkey FOREIGN KEY (productid)\n"
         + "REFERENCES \"SEP3\".product (productid) MATCH SIMPLE\n"
-        + "ON UPDATE NO ACTION ON DELETE NO ACTION, \n"
-        + "CONSTRAINT feedback_customerid_fkey FOREIGN KEY (customerid)\n"
-        + "REFERENCES \"SEP3\".customer (customerid) MATCH SIMPLE\n"
-        + "ON UPDATE NO ACTION ON DELETE NO ACTION ) \n"
-        + "\n" + "TABLESPACE pg_default;";
+        + "ON UPDATE NO ACTION ON DELETE NO ACTION) \n"
+        + "TABLESPACE pg_default;";
 
     try
     {

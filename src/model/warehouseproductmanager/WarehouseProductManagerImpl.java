@@ -141,4 +141,19 @@ public class WarehouseProductManagerImpl implements WarehouseProductManager{
         return null;
     }
 
+    @Override public WarehouseProduct UpdateWarehouseQuantity(int storeid,
+        int productid, int quantity)
+    {
+        try
+        {
+            WarehouseProduct tmp = warehouseProductDAO.UpdateWarehouseQuantity(storeid,productid,quantity);
+            return tmp;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

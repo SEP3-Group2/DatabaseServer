@@ -19,4 +19,6 @@ public interface WarehouseProductManager {
     void OrderProductFromStore(OrderProduct orderProduct);
     void DecrementProductQuantity(OrderProduct orderProduct);
     List<WarehouseProduct> getWarehouseProductFromStoresById(WarehouseProduct warehouseProduct);
+
+    WarehouseProduct UpdateWarehouseQuantity(int storeid, int productid,int quantity);
 }

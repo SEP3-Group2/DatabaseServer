@@ -129,6 +129,48 @@ public class Handler implements Runnable
                 List<CartProduct> result = databaseManager.getWarehouseProductManager().GetNotCartProducts(productid, quantity);
                 outToClient.writeObject(new Request("GetNotCartProducts", result));
             }
+            else if ("GetAllReserveHistory".equals(request.getType()))
+            {
+                List<ReserveHistory> result = databaseManager.getTransactionProductManager().getAllReserveHistory();
+                outToClient.writeObject(new Request("GetAllReserveHistory", result));
+            }
+            else if ("GetReserveHistoryByStoreEmail".equals(request.getType()))
+            {
+                String[] requests = (String[]) request.getArg();
+                int productid = Integer.parseInt(requests[0]);
+                String email = requests[1];
+                List<ReserveHistory> result = databaseManager.getTransactionProductManager().getReserveHistoryByStoreEmail(productid, email);
+                outToClient.writeObject(new Request("GetReserveHistoryByStoreEmail", result));
+            }
+            else if ("getReserveHistoryByStoreEmailDelivery".equals(request.getType()))
+            {
+                String[] requests = (String[]) request.getArg();
+                int productid = Integer.parseInt(requests[0]);
+                String email = requests[1];
+                String delivery = requests[2];
+                List<ReserveHistory> result = databaseManager.getTransactionProductManager().getReserveHistoryByStoreEmailDelivery(productid, email,delivery);
+                outToClient.writeObject(new Request("getReserveHistoryByStoreEmailDelivery", result));
+            }
+            else if ("UpdateTransactionToReady".equals(request.getType()))
+            {
+                Transaction result = databaseManager.getTransactionManager().UpdateTransactionToReady((int)request.getArg());
+                outToClient.writeObject(new Request("UpdateTransactionToReady", result));
+            }
+            else if ("UpdateTransactionToDelivered".equals(request.getType()))
+            {
+
+                Transaction result = databaseManager.getTransactionManager().UpdateTransactionToDelivered((int)request.getArg());
+                outToClient.writeObject(new Request("UpdateTransactionToDelivered", result));
+            }
+            else if ("UpdateWarehouseQuantity".equals(request.getType()))
+            {
+                int[] requests = (int[]) request.getArg();
+                int storeid = requests[0];
+                int productid= requests[1];
+                int quantity = requests[2];
+                WarehouseProduct result = databaseManager.getWarehouseProductManager().UpdateWarehouseQuantity(storeid, productid,quantity);
+                outToClient.writeObject(new Request("UpdateWarehouseQuantity", result));
+            }
             else if ("AddTransaction".equals(request.getType()))
             {
                 Transaction transaction = databaseManager.getTransactionManager().addTransaction((Transaction) request.getArg());
@@ -179,8 +221,8 @@ public class Handler implements Runnable
                 List<HistoryProduct> result = databaseManager.getTransactionProductManager().getTransProById((int)request.getArg());
                 outToClient.writeObject(new Request("GetHistoryProducts", result));
             }
-            else if("GetWarehouseProductFromStoresById".equals(request.getType())){
-
+            else if("GetWarehouseProductFromStoresById".equals(request.getType()))
+            {
                 List<WarehouseProduct> result=databaseManager.getWarehouseProductManager().getWarehouseProductFromStoresById((WarehouseProduct)request.getArg());
                 outToClient.writeObject(new Request("GetWarehouseProductFromStoresById", result));
             }

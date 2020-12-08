@@ -63,4 +63,30 @@ public class TransactionManagerImpl implements TransactionManager
     }
     return null;
   }
+
+  @Override public Transaction UpdateTransactionToReady(int id)
+  {
+    try
+    {
+      return transactionDAO.UpdateTransactionToReady(id);
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public Transaction UpdateTransactionToDelivered(int id)
+  {
+    try
+    {
+      return transactionDAO.UpdateTransactionToDelivered(id);
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
+  }
 }

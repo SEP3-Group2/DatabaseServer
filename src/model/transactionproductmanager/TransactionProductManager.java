@@ -1,6 +1,7 @@
 package model.transactionproductmanager;
 
 import transferobjects.HistoryProduct;
+import transferobjects.ReserveHistory;
 import transferobjects.Transaction;
 import transferobjects.TransactionProduct;
 
@@ -11,5 +12,9 @@ public interface TransactionProductManager
 {
   TransactionProduct addTransactionProduct(TransactionProduct transactionProduct);
 
-  List<HistoryProduct> getTransProById(int transid) ;
+  List<HistoryProduct> getTransProById(int transid);
+
+  List<ReserveHistory> getAllReserveHistory();
+  List<ReserveHistory> getReserveHistoryByStoreEmail(int storeid, String email)  ;
+  List<ReserveHistory> getReserveHistoryByStoreEmailDelivery(int storeid, String email, String deliverymethod)  ;
 }
