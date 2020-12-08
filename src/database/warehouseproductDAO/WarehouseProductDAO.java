@@ -19,4 +19,5 @@ public interface WarehouseProductDAO {
     void OrderProductFromStore(OrderProduct orderProduct) throws SQLException;
     void DecrementProductQuantity(OrderProduct orderProduct) throws SQLException;
     List<WarehouseProduct> getWarehouseProductFromStoresById(WarehouseProduct warehouseProduct) throws SQLException;
+    WarehouseProduct UpdateWarehouseQuantity(int storeid, int productid, int quantity) throws SQLException;
 }
