@@ -202,6 +202,17 @@ public class Handler implements Runnable
             else if("DeleteEmployeeUser".equals(request.getType())){
                 databaseManager.getEmployeeManager().deleteUser((int)request.getArg());
             }
+            else if("GetAllRatings".equals(request.getType())){
+                List<Rating> result=databaseManager.getRatingManager().getAllRatings();
+                outToClient.writeObject(new Request("GetAllRatings", result));
+            }
+            else if("AddRating".equals(request.getType())){
+                databaseManager.getRatingManager().addRating((Rating)request.getArg());
+            }
+            else if("DidUserBuyThisProduct".equals(request.getType())){
+                List<DidUserBuyJoin> result=databaseManager.getRatingManager().didUserBuyThisProduct((String)request.getArg());
+                outToClient.writeObject(new Request("DidUserBuyThisProduct", result));
+            }
         }
         catch (IOException |
                 ClassNotFoundException e)
