@@ -98,7 +98,7 @@ public class CreateDatabase
 
     sql = "\n"
         + "CREATE SEQUENCE IF NOT EXISTS \"SEP3\".employee_employeeid_seq\n"
-        + "    INCREMENT 1\n" + "    START 2\n" + "    MINVALUE 1\n"
+        + "    INCREMENT 1\n" + "    START 5\n" + "    MINVALUE 1\n"
         + "    MAXVALUE 2147483647\n" + "    CACHE 1;";
 
     try
@@ -805,7 +805,7 @@ public class CreateDatabase
     "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 97, 17);"+
     "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 98, 12);"+
     "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 99, 8);"+
-    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 100, 0);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (1, 100, 1);"+
     "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 1, 8);"+
     "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 2, 3);"+
     "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 3, 6);"+
@@ -905,7 +905,7 @@ public class CreateDatabase
     "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 97, 3);"+
     "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 98, 15);"+
     "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 99, 13);"+
-    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 100, 0);"+
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (2, 100, 2);"+
     "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 1, 8);"+
     "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 2, 2);"+
     "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 3, 18);"+
@@ -1005,7 +1005,7 @@ public class CreateDatabase
     "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 97, 13);"+
     "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 98, 12);"+
     "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 99, 19);"+
-    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 100, 0);";
+    "INSERT INTO \"SEP3\".warehouseproduct (storeid, productid, quantity) VALUES (3, 100, 3);";
 
     try
     {
