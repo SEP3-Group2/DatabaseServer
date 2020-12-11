@@ -14,6 +14,8 @@ import model.employeemanager.EmployeeManager;
 import model.employeemanager.EmployeeManagerImpl;
 import model.productmanager.ProductManager;
 import model.productmanager.ProductManagerImpl;
+import model.ratingmanager.RatingManager;
+import model.ratingmanager.RatingManagerImpl;
 import model.transactionmanager.TransactionManager;
 import model.transactionmanager.TransactionManagerImpl;
 import model.transactionproductmanager.TransactionProductManager;
@@ -36,6 +38,9 @@ public class DatabaseManagerImpl
     private final TransactionManager transactionManager;
     private final TransactionProductManager transactionProductManager;
     private final WPJoinManager wpJoinManager;
+    private final RatingManager ratingManager;
+
+
 
     public DatabaseManagerImpl()
     {
@@ -46,6 +51,7 @@ public class DatabaseManagerImpl
         transactionManager = new TransactionManagerImpl();
         transactionProductManager = new TransactionProductManagerImpl();
         wpJoinManager=new WPJoinManagerImpl();
+        ratingManager=new RatingManagerImpl();
     }
 
     public TransactionProductManager getTransactionProductManager()
@@ -72,6 +78,9 @@ public class DatabaseManagerImpl
     public WPJoinManager getWpJoinManager(){return wpJoinManager;}
 
     public TransactionManager getTransactionManager(){return transactionManager;}
+    public RatingManager getRatingManager() {
+        return ratingManager;
+    }
 
     /*
     private ClientDAO clientDAO;
